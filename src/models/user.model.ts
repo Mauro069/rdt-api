@@ -5,8 +5,16 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: false },
   password: { type: String, required: true },
-  status: { type: String, enum: ['PENDING', 'VALIDATED', 'SUSPENDED'], default: 'PENDING' },
-  userType: { type: String, enum: ['APPLICANT', 'COMPANY', 'ADMIN'], default: 'APPLICANT' }
+  status: {
+    type: String,
+    enum: ['PENDING', 'VALIDATED', 'SUSPENDED'],
+    default: 'PENDING',
+  },
+  userType: {
+    type: String,
+    enum: ['APPLICANT', 'COMPANY', 'ADMIN'],
+    default: 'APPLICANT',
+  },
 })
 
 userSchema.set('toJSON', {

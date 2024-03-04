@@ -35,9 +35,13 @@ export async function login(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.userType }, env.SECRET!, {
-      expiresIn: '1h',
-    })
+    const token = jwt.sign(
+      { userId: user.id, role: user.userType },
+      env.SECRET!,
+      {
+        expiresIn: '1h',
+      }
+    )
 
     res.status(200).json({ message: messages.success.login, token })
   } catch (error) {

@@ -15,11 +15,10 @@ const applicantSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  image:
-  {
+  image: {
     secure_url: String,
-    public_id: String
-  }
+    public_id: String,
+  },
 })
 
 applicantSchema.plugin(mongoosePaginate)

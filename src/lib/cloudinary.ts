@@ -8,11 +8,9 @@ cloudinary.config({
   secure: true,
 })
 
-export const uploadFile = async (
-  filePath: string
-) => {
+export const uploadFile = async (filePath: string) => {
   return await cloudinary.uploader.upload(filePath, {
-    folder: 'rtd-app'
+    folder: 'rtd-app',
   })
 }
 

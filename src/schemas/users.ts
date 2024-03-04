@@ -1,7 +1,6 @@
 import z from 'zod'
 import { IUser } from '../interfaces'
 
-
 const userSchema = z.object({
   username: z.string({
     required_error: 'Username is required.',
@@ -19,9 +18,7 @@ export function validateUser(input: IUser) {
 }
 
 export function validateLoginlUser(input: IUser) {
-  return userSchema
-    .partial({ email: true })
-    .safeParse(input)
+  return userSchema.partial({ email: true }).safeParse(input)
 }
 
 export function validatePartialUser(input: IUser) {
