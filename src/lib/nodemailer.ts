@@ -1,46 +1,47 @@
-import nodemailer from 'nodemailer';
-import { env } from '../config';
+import nodemailer from 'nodemailer'
+import { env } from '../config'
 
 const send = (subject: string, html: string, to: string): void => {
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: env.APP_EMAIL_ACCOUNT,
-            pass: env.APP_EMAIL_PASSWORD,
-        },
-    });
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: env.APP_EMAIL_ACCOUNT,
+      pass: env.APP_EMAIL_PASSWORD,
+    },
+  })
 
-    // setting credentials
-    const mailDetails = {
-        from: env.APP_EMAIL_ACCOUNT,
-        to,
-        subject,
-        text: "",
-        html,
-        attachments: [{
-            filename: 'logo-rdt.web',
-            path: './public/logo-rdt.webp',
-            cid: 'logo',
-        }],
-    };
+  // setting credentials
+  const mailDetails = {
+    from: env.APP_EMAIL_ACCOUNT,
+    to,
+    subject,
+    text: '',
+    html,
+    attachments: [
+      {
+        filename: 'logo-rdt.web',
+        path: './public/logo-rdt.webp',
+        cid: 'logo',
+      },
+    ],
+  }
 
-    // sending email
-    transporter.sendMail(mailDetails)
-        .then(data => {
-            console.log('---------------------');
-            console.log('email sent successfully');
-        })
-        .catch(err => {
-            console.log('error occurred', err.message);
-        });
-};
+  // sending email
+  transporter
+    .sendMail(mailDetails)
+    .then((data) => {
+      console.log('---------------------')
+      console.log('email sent successfully')
+    })
+    .catch((err) => {
+      console.log('error occurred', err.message)
+    })
+}
 
 const getTemplate = (name: string, urlConfirm: string) => {
-
-
-    return `
+  return `
       <head>
           <link rel="stylesheet" href="./style.css">
       </head>
@@ -54,12 +55,12 @@ const getTemplate = (name: string, urlConfirm: string) => {
               target="_blank"
           >Confirmar Cuenta</a>
       </div>
-    `;
+    `
 }
 
 const mailService = {
-    send,
-    getTemplate
-};
+  send,
+  getTemplate,
+}
 
-export default mailService;
+export default mailService

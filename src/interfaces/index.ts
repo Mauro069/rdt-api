@@ -21,5 +21,4 @@ export interface IUser extends Document {
   code: string
   status: UserStatus
   userType: UserType
-
 }

@@ -41,10 +41,10 @@ export async function register(req: Request, res: Response): Promise<void> {
 
     const token = getToken({ username: username, code: newUser.code })
 
-    const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`;
-    const template = mailService.getTemplate(username, urlConfirm);
+    const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`
+    const template = mailService.getTemplate(username, urlConfirm)
 
-    mailService.send('Registro RDT - Confirmá tu correo', template, email);
+    mailService.send('Registro RDT - Confirmá tu correo', template, email)
 
     await newUser.save()
 

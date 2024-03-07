@@ -35,7 +35,7 @@ const createAdminUser = async () => {
       password: bcrypt.hashSync(env.ADMIN_PASSWORD, 8),
       code: uuidv4(),
       userType: userType.ADMIN,
-      status: userStatus.VERIFIED
+      status: userStatus.VERIFIED,
     })
     const savedInstance = await adminUser.save()
     console.log('Usuario admin created', savedInstance)

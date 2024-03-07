@@ -34,7 +34,7 @@ export async function login(req: Request, res: Response): Promise<void> {
       return
     }
 
-    if(user.status === userStatus.UNVERIFIED){
+    if (user.status === userStatus.UNVERIFIED) {
       res.status(401).json({ message: messages.error.unverifiedUser })
       return
     }

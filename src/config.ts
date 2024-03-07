@@ -12,7 +12,8 @@ export const env = {
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ?? 'cloud_secret',
   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY ?? 'cloud_key',
   CLOUDINARY_FOLDER: process.env.CLOUDINARY_FOLDER ?? 'rdt-app',
-  APP_EMAIL_ACCOUNT: process.env.APP_EMAIL_ACCOUNT ?? 'pruebas.desarrollo.all@gmail.com',
+  APP_EMAIL_ACCOUNT:
+    process.env.APP_EMAIL_ACCOUNT ?? 'pruebas.desarrollo.all@gmail.com',
   APP_EMAIL_PASSWORD: process.env.APP_EMAIL_PASSWORD ?? 'ymkc hbdb cnex hvvq',
-  APP_API_URL: process.env.APP_API_URL ?? 'localhost:8000'
+  APP_API_URL: process.env.APP_API_URL ?? 'localhost:8000',
 }

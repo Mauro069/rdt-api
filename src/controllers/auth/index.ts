@@ -8,5 +8,5 @@ export const AuthController = {
   register,
   login,
   confirm,
-  mail
+  mail,
 }

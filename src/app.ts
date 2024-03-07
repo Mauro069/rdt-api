@@ -21,7 +21,7 @@ app.get<{}, MessageResponse>('/', (_req, res) => {
   })
 })
 
-app.use(express.static('./public'));
+app.use(express.static('./public'))
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 

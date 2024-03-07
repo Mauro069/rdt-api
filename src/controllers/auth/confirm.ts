@@ -8,10 +8,10 @@ import { getTokenData } from '../../utils/jwt'
 
 export async function confirm(req: Request, res: Response): Promise<void> {
   try {
-    const { token } = req.params;
+    const { token } = req.params
     // Verificar la data
     console.log('el token que llega es este', req.params)
-    const data = getTokenData(token);
+    const data = getTokenData(token)
 
     if (data === null) {
       res.status(401).json({ message: 'Error al obtener leer token' })
@@ -20,7 +20,7 @@ export async function confirm(req: Request, res: Response): Promise<void> {
 
     console.log('el token decodificado', data)
 
-    const { username, code } = data;
+    const { username, code } = data
 
     // // Verificar existencia del usuario
     const user: IUser | null = await UserModel.findOne({ username: username })
@@ -32,19 +32,18 @@ export async function confirm(req: Request, res: Response): Promise<void> {
 
     // Verificar el código
     if (code !== user.code) {
-      return res.redirect('/error.html');
+      return res.redirect('/error.html')
     }
 
     // // Actualizar usuario
     //@ts-ignore
-    user.status = userStatus.VERIFIED;
-    await user.save();
+    user.status = userStatus.VERIFIED
+    await user.save()
 
     // // Redireccionar a la confirmación
-    return res.redirect('/confirm.html');
-
+    return res.redirect('/confirm.html')
   } catch (error) {
-    console.log(error);
+    console.log(error)
     res.status(500).json({ message: messages.error.generic, error })
   }
 }
