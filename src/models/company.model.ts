@@ -2,17 +2,17 @@ import { Schema, model, Document } from 'mongoose'
 // @ts-ignore
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-export interface IApplicant extends Document {
+export interface ICompany extends Document {
   user: Schema.Types.ObjectId
   image: {
     secure_url: string
     public_id: string
   }
-  name: string
-  lastName: string
+  businessName: string
+  industry: string
 }
 
-const applicantSchema = new Schema({
+const companySchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -21,13 +21,13 @@ const applicantSchema = new Schema({
     secure_url: String,
     public_id: String,
   },
-  name: String,
-  lastName: String,
+  businessName: String,
+  industry: String,
 })
 
-applicantSchema.plugin(mongoosePaginate)
+companySchema.plugin(mongoosePaginate)
 
-applicantSchema.set('toJSON', {
+companySchema.set('toJSON', {
   transform: (_document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -36,4 +36,4 @@ applicantSchema.set('toJSON', {
   },
 })
 
-export const ApplicantModel = model<IApplicant>('Applicant', applicantSchema)
+export const CompanyModel = model<ICompany>('Company', companySchema)
