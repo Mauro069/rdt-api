@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import { UserModel } from '../models/user.model'
 import { env } from '../config'
+import { userStatus, userType } from '../utils/constants'
+import { v4 as uuidv4 } from 'uuid'
 
 export function connectToDatabase() {
   const mongooseOptions = {}
@@ -31,7 +33,9 @@ const createAdminUser = async () => {
       username: env.ADMIN_USERNAME,
       email: env.ADMIN_EMAIL,
       password: bcrypt.hashSync(env.ADMIN_PASSWORD, 8),
-      userType: 'ADMIN',
+      code: uuidv4(),
+      userType: userType.ADMIN,
+      status: userStatus.VERIFIED
     })
     const savedInstance = await adminUser.save()
     console.log('Usuario admin created', savedInstance)

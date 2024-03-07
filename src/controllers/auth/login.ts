@@ -1,13 +1,12 @@
 import { Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
 import { UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
-import { env } from '../../config'
-
 import { IUser } from '../../interfaces'
 import { validateLoginlUser } from '../../schemas/users'
+import { userStatus } from '../../utils/constants'
+import { getToken } from '../../utils/jwt'
 
 export async function login(req: Request, res: Response): Promise<void> {
   try {
@@ -35,13 +34,12 @@ export async function login(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const token = jwt.sign(
-      { userId: user.id, role: user.userType },
-      env.SECRET!,
-      {
-        expiresIn: '1h',
-      }
-    )
+    if(user.status === userStatus.UNVERIFIED){
+      res.status(401).json({ message: messages.error.unverifiedUser })
+      return
+    }
+
+    const token = getToken({ userId: user.id, role: user.userType })
 
     res.status(200).json({ message: messages.success.login, token })
   } catch (error) {

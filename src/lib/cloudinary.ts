@@ -10,7 +10,7 @@ cloudinary.config({
 
 export const uploadFile = async (filePath: string) => {
   return await cloudinary.uploader.upload(filePath, {
-    folder: 'rtd-app',
+    folder: env.CLOUDINARY_FOLDER,
   })
 }
 

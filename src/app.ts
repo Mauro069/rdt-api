@@ -17,10 +17,11 @@ app.disable('x-powered-by')
 
 app.get<{}, MessageResponse>('/', (_req, res) => {
   res.json({
-    message: 'Hi there, api cvu is working... 🌈 ',
+    message: 'Hi there, rdt api is working... 🌈 ',
   })
 })
 
+app.use(express.static('./public'));
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 

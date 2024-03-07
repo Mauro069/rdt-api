@@ -5,10 +5,11 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: false },
   password: { type: String, required: true },
+  code: { type: String, required: true },
   status: {
     type: String,
-    enum: ['PENDING', 'VALIDATED', 'SUSPENDED'],
-    default: 'PENDING',
+    enum: ['UNVERIFIED', 'VERIFIED', 'SUSPENDED'],
+    default: 'UNVERIFIED',
   },
   userType: {
     type: String,

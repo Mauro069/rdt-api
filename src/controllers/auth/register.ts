@@ -5,6 +5,10 @@ import { UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
 import { validateUser } from '../../schemas/users'
 import { IUser } from '../../interfaces'
+import { env } from '../../config'
+import mailService from '../../lib/nodemailer'
+import { getToken } from '../../utils/jwt'
+import { v4 as uuidv4 } from 'uuid'
 
 export async function register(req: Request, res: Response): Promise<void> {
   try {
@@ -31,8 +35,16 @@ export async function register(req: Request, res: Response): Promise<void> {
 
     const newUser: IUser = new UserModel({
       ...result.data,
+      code: uuidv4(),
       password: hashedPassword,
     })
+
+    const token = getToken({ username: username, code: newUser.code })
+
+    const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`;
+    const template = mailService.getTemplate(username, urlConfirm);
+
+    mailService.send('Registro RDT - Confirmá tu correo', template, email);
 
     await newUser.save()
 

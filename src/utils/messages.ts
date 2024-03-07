@@ -12,6 +12,7 @@ export const messages = {
   },
   error: {
     generic: 'Error en el servidor',
+    unverifiedUser: 'Usuario no verificado',
     invalidCredentials: 'Credenciales inválidas',
     invalidEmail: 'Email inválido',
     invalidDNI: 'DNI inválido',

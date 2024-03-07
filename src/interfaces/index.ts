@@ -7,7 +7,7 @@ export interface DecodedToken {
 
 export type UserType = 'APPLICANT' | 'COMPANY' | 'ADMIN'
 
-export type UserStatus = 'PENDING' | 'VALIDATED' | 'SUSPENDED'
+export type UserStatus = 'UNVERIFIED' | 'VERIFIED' | 'SUSPENDED'
 
 export interface MessageResponse {
   message: string
@@ -18,6 +18,8 @@ export interface IUser extends Document {
   username: string
   email: string
   password: string
+  code: string
   status: UserStatus
   userType: UserType
+
 }
