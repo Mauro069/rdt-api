@@ -18,7 +18,8 @@ const options = {
     },
     components: {
       securitySchemes: {
-        customToken: { // Nombre del esquema de seguridad personalizado
+        customToken: {
+          // Nombre del esquema de seguridad personalizado
           type: 'apiKey', // Tipo de esquema de seguridad (apiKey)
           in: 'header', // Indica que el token se enviará en el encabezado
           name: 'authorization', // Nombre del parámetro que contendrá el token
