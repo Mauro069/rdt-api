@@ -2,6 +2,7 @@ import express from 'express'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import { connectToDatabase } from './lib/mongodb'
+import { setupSwaggerDocs } from './lib/swagger'
 import { env } from './config'
 import { MessageResponse } from './interfaces'
 import { corsMiddleware } from './middlewares/cors'
@@ -24,6 +25,8 @@ app.get<{}, MessageResponse>('/', (_req, res) => {
 app.use(express.static('./public'))
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
+
+setupSwaggerDocs(app)
 
 app.listen(port, () => {
   connectToDatabase()
