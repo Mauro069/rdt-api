@@ -21,9 +21,15 @@
  *               - username
  *               - email
  *               - password
+ *     security:
+ *       - customToken: []
  *     responses:
  *       '201':
  *         description: Usuario administrador registrado exitosamente.
+ *       '400':
+ *         description: Error de validación en los datos del usuario.
+ *       '500':
+ *         description: Error interno del servidor.
  * /auth/register-applicant:
  *   post:
  *     summary: Registro de solicitante
@@ -54,6 +60,10 @@
  *     responses:
  *       '201':
  *         description: Solicitante registrado exitosamente.
+ *       '400':
+ *         description: Error de validación en los datos del solicitante.
+ *       '500':
+ *         description: Error interno del servidor.
  * /auth/register-company:
  *   post:
  *     summary: Registro de empresa
@@ -84,6 +94,10 @@
  *     responses:
  *       '201':
  *         description: Empresa registrada exitosamente.
+ *       '400':
+ *         description: Error de validación en los datos de la empresa.
+ *       '500':
+ *         description: Error interno del servidor.
  * /auth/login:
  *   post:
  *     summary: Iniciar sesión
@@ -132,6 +146,10 @@
  *     responses:
  *       '200':
  *         description: Registro confirmado correctamente.
+ *       '401':
+ *         description: Error al obtener o leer el token.
+ *       '500':
+ *         description: Error interno del servidor.
  */
 
 import { Router } from 'express'

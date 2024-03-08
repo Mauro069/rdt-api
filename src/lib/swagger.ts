@@ -16,6 +16,15 @@ const options = {
         email: 'pabloj.pedraza@gmail.com',
       },
     },
+    components: {
+      securitySchemes: {
+        customToken: { // Nombre del esquema de seguridad personalizado
+          type: 'apiKey', // Tipo de esquema de seguridad (apiKey)
+          in: 'header', // Indica que el token se enviará en el encabezado
+          name: 'authorization', // Nombre del parámetro que contendrá el token
+        },
+      },
+    },
     servers: [
       {
         url: 'http://localhost:8000',
@@ -23,10 +32,8 @@ const options = {
     ],
   },
   apis: ['**/*.ts'],
-  //apis: [path.resolve(__dirname, '../../routes/*.ts')],
 }
 
-console.log('aaaa', path.resolve(__dirname, '../../routes/*.ts'))
 const specs = swaggerJsdoc(options)
 
 export function setupSwaggerDocs(app: Express) {
