@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 
-import { UserModel } from '../../models/user.model'
+import { IUser, UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
-import { IUser } from '../../interfaces'
-import { validateLoginlUser } from '../../schemas/users'
+
+import { validateLoginlUser } from '../../schemas/auth'
 import { userStatus } from '../../utils/constants'
 import { getToken } from '../../utils/jwt'
 
@@ -39,7 +39,7 @@ export async function login(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const token = getToken({ userId: user.id, role: user.userType })
+    const token = getToken({ userId: user.id, userType: user.userType })
 
     res.status(200).json({ message: messages.success.login, token })
   } catch (error) {

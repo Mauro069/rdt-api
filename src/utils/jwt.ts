@@ -7,7 +7,7 @@ export function getToken(payload: any) {
   })
 }
 
-export function getTokenData(token: string) {
+export function getTokenData(token: string): any {
   let data = null
   jwt.verify(
     token,

@@ -1,10 +1,9 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 
-import { UserModel } from '../../models/user.model'
+import { IUser, UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
-import { validateUser } from '../../schemas/users'
-import { IUser } from '../../interfaces'
+import { validateUser } from '../../schemas/auth'
 import { v4 as uuidv4 } from 'uuid'
 import { userStatus, userType } from '../../utils/constants'
 

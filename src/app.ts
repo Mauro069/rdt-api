@@ -1,6 +1,7 @@
 import express from 'express'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
+import applicantRoutes from './routes/applicant.routes'
 import { connectToDatabase } from './lib/mongodb'
 import { setupSwaggerDocs } from './lib/swagger'
 import { env } from './config'
@@ -25,6 +26,7 @@ app.get<{}, MessageResponse>('/', (_req, res) => {
 app.use(express.static('./public'))
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
+app.use('/applicants', applicantRoutes)
 
 setupSwaggerDocs(app)
 

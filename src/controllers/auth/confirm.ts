@@ -1,8 +1,6 @@
 import { Request, Response } from 'express'
-import { UserModel } from '../../models/user.model'
+import { IUser, UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
-
-import { IUser } from '../../interfaces'
 import { userStatus } from '../../utils/constants'
 import { getTokenData } from '../../utils/jwt'
 

@@ -1,5 +1,4 @@
 import z from 'zod'
-import { IUser } from '../interfaces'
 
 const userSchema = z.object({
   username: z.string({
@@ -13,16 +12,12 @@ const userSchema = z.object({
   }),
 })
 
-export function validateUser(input: IUser) {
+export function validateUser(input: any) {
   return userSchema.safeParse(input)
 }
 
-export function validateLoginlUser(input: IUser) {
+export function validateLoginlUser(input: any) {
   return userSchema.partial({ email: true }).safeParse(input)
-}
-
-export function validatePartialUser(input: IUser) {
-  return userSchema.partial().safeParse(input)
 }
 
 const applicantUserSchema = z.object({

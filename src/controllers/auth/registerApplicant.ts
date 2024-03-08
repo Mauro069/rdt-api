@@ -1,10 +1,9 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 
-import { UserModel } from '../../models/user.model'
+import { IUser, UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
-import { validateApplicantUser } from '../../schemas/users'
-import { IUser } from '../../interfaces'
+import { validateApplicantUser } from '../../schemas/auth'
 import { env } from '../../config'
 import mailService from '../../lib/nodemailer'
 import { getToken } from '../../utils/jwt'

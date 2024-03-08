@@ -15,9 +15,9 @@ export function userTypeMiddleware(allowedType: UserType) {
         res.status(400).json({ message: messages.error.notFound })
         return
       }
-      const roleValid = existingUser.userType === allowedType
+      const isallowed = existingUser.userType === allowedType
 
-      if (!roleValid) {
+      if (!isallowed) {
         res.status(400).json({ message: messages.error.unauthorized })
         return
       }
