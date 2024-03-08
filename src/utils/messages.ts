@@ -1,4 +1,7 @@
 export const messages = {
+  mail: {
+    registerSubject: 'Registro RDT - Confirmá tu correo',
+  },
   success: {
     registration: 'Usuario registrado con éxito',
     login: 'Inicio de sesión exitoso',
@@ -19,7 +22,7 @@ export const messages = {
     existingUser: 'Ya hay un usuario registrado con esa información',
     userNotFound: 'Usuario no encontrado',
     usersNotFound: 'No se encontraron usuarios',
-    unauthorized: 'No autorizado',
+    unauthorized: 'Usuario No autorizado',
     notFound: 'No encontrado',
     idNotFound: 'ID no encontrada',
     idNotValid: 'ID no valida',

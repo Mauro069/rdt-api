@@ -9,16 +9,13 @@ import { getTokenData } from '../../utils/jwt'
 export async function confirm(req: Request, res: Response): Promise<void> {
   try {
     const { token } = req.params
-    // Verificar la data
-    console.log('el token que llega es este', req.params)
+
     const data = getTokenData(token)
 
     if (data === null) {
       res.status(401).json({ message: 'Error al obtener leer token' })
       return
     }
-
-    console.log('el token decodificado', data)
 
     const { username, code } = data
 
@@ -36,7 +33,6 @@ export async function confirm(req: Request, res: Response): Promise<void> {
     }
 
     // // Actualizar usuario
-    //@ts-ignore
     user.status = userStatus.VERIFIED
     await user.save()
 

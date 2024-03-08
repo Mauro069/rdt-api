@@ -60,8 +60,8 @@ const companyUserSchema = z.object({
   businessName: z.string({
     required_error: 'businessName is required.',
   }),
-  industry: z.string({
-    required_error: 'Industry is required.',
+  description: z.string({
+    required_error: 'Description is required.',
   }),
 })
 

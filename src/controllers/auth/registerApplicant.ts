@@ -47,8 +47,7 @@ export async function registerApplicant(
 
     const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`
     const template = mailService.getTemplate(username, urlConfirm)
-
-    mailService.send('Registro RDT - Confirmá tu correo', template, email)
+    mailService.send(messages.mail.registerSubject, template, email)
 
     await newUser.save()
 

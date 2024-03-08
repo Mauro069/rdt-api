@@ -9,6 +9,7 @@ import { env } from '../../config'
 import mailService from '../../lib/nodemailer'
 import { getToken } from '../../utils/jwt'
 import { v4 as uuidv4 } from 'uuid'
+import { userStatus, userType } from '../../utils/constants'
 
 export async function register(req: Request, res: Response): Promise<void> {
   try {
@@ -36,15 +37,10 @@ export async function register(req: Request, res: Response): Promise<void> {
     const newUser: IUser = new UserModel({
       ...result.data,
       code: uuidv4(),
+      userType: userType.ADMIN,
+      status: userStatus.VERIFIED,
       password: hashedPassword,
     })
-
-    const token = getToken({ username: username, code: newUser.code })
-
-    const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`
-    const template = mailService.getTemplate(username, urlConfirm)
-
-    mailService.send('Registro RDT - Confirmá tu correo', template, email)
 
     await newUser.save()
 

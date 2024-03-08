@@ -9,7 +9,7 @@ export interface ICompany extends Document {
     public_id: string
   }
   businessName: string
-  industry: string
+  description: string
 }
 
 const companySchema = new Schema({
@@ -22,7 +22,7 @@ const companySchema = new Schema({
     public_id: String,
   },
   businessName: String,
-  industry: String,
+  description: String,
 })
 
 companySchema.plugin(mongoosePaginate)

@@ -3,7 +3,7 @@ import { UserType } from '../interfaces'
 import { UserModel } from '../models/user.model'
 import { messages } from '../utils/messages'
 
-export function roleMiddleware(allowedType: UserType) {
+export function userTypeMiddleware(allowedType: UserType) {
   return async function (req: Request, res: Response, next: NextFunction) {
     try {
       // @ts-ignore

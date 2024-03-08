@@ -25,7 +25,7 @@ export async function registerCompany(
       return
     }
 
-    const { username, email, password, businessName, industry } = result.data
+    const { username, email, password, businessName, description } = result.data
 
     const existingUser = await UserModel.findOne({
       $or: [{ username }, { email }],
@@ -49,8 +49,7 @@ export async function registerCompany(
 
     const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`
     const template = mailService.getTemplate(username, urlConfirm)
-
-    mailService.send('Registro RDT - Confirmá tu correo', template, email)
+    mailService.send(messages.mail.registerSubject, template, email)
 
     await newUser.save()
 
@@ -59,7 +58,7 @@ export async function registerCompany(
     const newCompany: ICompany = new CompanyModel({
       user: userId,
       businessName: businessName,
-      industry: industry,
+      description: description,
     })
 
     await newCompany.save()
