@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const env = {
-  PORT: parseInt(process.env.PORT ?? '8001', 10),
+  PORT: parseInt(process.env.PORT ?? '8000', 10),
   MONGODB_URI: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1/rdt',
   SECRET: process.env.SECRET ?? 'RDT-SECRET-KEY',
   ADMIN_USERNAME: process.env.ADMIN_USERNAME ?? 'admin',

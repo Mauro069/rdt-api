@@ -3,15 +3,15 @@ import fs from 'fs-extra'
 
 import { messages } from '../../utils/messages'
 import { getUserId } from '../../utils/getUserId'
-import { ApplicantModel } from '../../models/applicant.model'
-import { validateApplicant } from '../../schemas/applicant'
+import { CompanyModel } from '../../models/company.model'
+import { validateCompany } from '../../schemas/company'
 import { UploadImageResult, uploadImage } from '../../utils/uploadImage'
 import { UploadedFile } from 'express-fileupload'
 import { deleteFile } from '../../lib/cloudinary'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {
-    const result = validateApplicant(req.body)
+    const result = validateCompany(req.body)
 
     if (!result.success) {
       //@ts-ignore
@@ -20,7 +20,7 @@ export async function update(req: Request, res: Response): Promise<void> {
     }
 
     if (req.files?.image) {
-      const resultImage = validateApplicant(req.files)
+      const resultImage = validateCompany(req.files)
 
       if (!resultImage.success) {
         if (req.files?.image) {
@@ -48,10 +48,10 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const existingApplicant = await ApplicantModel.findOne({ user: id })
+    const existingCompany = await CompanyModel.findOne({ user: id })
 
-    if (!existingApplicant) {
-      res.status(404).json({ message: messages.error.applicantNotFound })
+    if (!existingCompany) {
+      res.status(404).json({ message: messages.error.companyNotFound })
       return
     }
 
@@ -63,25 +63,26 @@ export async function update(req: Request, res: Response): Promise<void> {
         res.status(401).json({ message: uploadResult.message })
         return
       }
-      if (existingApplicant.image?.public_id) {
-        await deleteFile(existingApplicant.image.public_id)
+      if (existingCompany.image?.public_id) {
+        await deleteFile(existingCompany.image.public_id)
       }
 
-      if (uploadResult.image) existingApplicant.image = uploadResult.image
+      if (uploadResult.image) existingCompany.image = uploadResult.image
     }
 
-    if (result.data.hasOwnProperty('name')) {
-      if (result.data.name) existingApplicant.name = result.data.name
+    if (result.data.hasOwnProperty('businessName')) {
+      if (result.data.businessName)
+        existingCompany.businessName = result.data.businessName
     }
 
-    if (result.data.hasOwnProperty('lastName')) {
-      if (result.data.lastName)
-        existingApplicant.lastName = result.data.lastName
+    if (result.data.hasOwnProperty('description')) {
+      if (result.data.description)
+        existingCompany.description = result.data.description
     }
 
-    await existingApplicant.save()
+    await existingCompany.save()
 
-    res.status(201).json({ message: messages.success.applicantUpdated })
+    res.status(201).json({ message: messages.success.companyUpdated })
   } catch (error) {
     res.status(500).json({ message: messages.error.generic, error })
   }
