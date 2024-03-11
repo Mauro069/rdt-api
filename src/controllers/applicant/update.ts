@@ -7,6 +7,7 @@ import { ApplicantModel } from '../../models/applicant.model'
 import { validateApplicant } from '../../schemas/applicant'
 import { UploadImageResult, uploadImage } from '../../utils/uploadImage'
 import { UploadedFile } from 'express-fileupload'
+import { deleteFile } from '../../lib/cloudinary'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {
@@ -62,6 +63,10 @@ export async function update(req: Request, res: Response): Promise<void> {
         res.status(401).json({ message: uploadResult.message })
         return
       }
+      if (existingApplicant.image) {
+        await deleteFile(existingApplicant.image.public_id)
+      }
+
       if (uploadResult.image) existingApplicant.image = uploadResult.image
     }
 
