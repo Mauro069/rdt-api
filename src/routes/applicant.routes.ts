@@ -74,6 +74,81 @@
  *                 message:
  *                   type: string
  *                   description: Error message indicating the cause of the failure.
+ * /applicants/:
+ *   get:
+ *     summary: Obtiene los datos del solicitante.
+ *     description: Obtiene los datos del solicitante autenticado.
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: Datos del solicitante obtenidos con éxito.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 applicant:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       type: object
+ *                       properties:
+ *                         username:
+ *                           type: string
+ *                           description: Nombre de usuario.
+ *                         email:
+ *                           type: string
+ *                           description: Dirección de correo electrónico.
+ *                         password:
+ *                           type: string
+ *                           description: Contraseña del usuario.
+ *                         code:
+ *                           type: string
+ *                           description: Código de usuario.
+ *                         status:
+ *                           type: string
+ *                           enum: [UNVERIFIED, VERIFIED, SUSPENDED]
+ *                           description: Estado del usuario.
+ *                         userType:
+ *                           type: string
+ *                           enum: [APPLICANT, COMPANY, ADMIN]
+ *                           description: Tipo de usuario.
+ *                     image:
+ *                       type: object
+ *                       properties:
+ *                         secure_url:
+ *                           type: string
+ *                           description: URL segura de la imagen.
+ *                         public_id:
+ *                           type: string
+ *                           description: ID público de la imagen.
+ *                     name:
+ *                       type: string
+ *                       description: Nombre del solicitante.
+ *                     lastName:
+ *                       type: string
+ *                       description: Apellido del solicitante.
+ *       '401':
+ *         description: No autorizado - Fallo en la autenticación del usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error que indica la causa del fallo.
+ *       '500':
+ *         description: Error interno del servidor - Error genérico.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error que indica la causa del fallo.
  */
 
 import { Router } from 'express'
@@ -88,5 +163,7 @@ router.post(
   [authMiddleware, uploadMiddleware],
   ApplicantController.update
 )
+
+router.get('/', [authMiddleware], ApplicantController.get)
 
 export default router
