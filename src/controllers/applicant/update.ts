@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import fs from 'fs-extra'
 
 import { messages } from '../../utils/messages'
 import { getUserId } from '../../utils/getUserId'
@@ -15,6 +16,28 @@ export async function update(req: Request, res: Response): Promise<void> {
       //@ts-ignore
       res.status(400).json({ error: JSON.parse(result.error.message) })
       return
+    }
+
+    if (req.files?.image) {
+      const resultImage = validateApplicant(req.files)
+
+      if (!resultImage.success) {
+        if (req.files?.image) {
+          const files: UploadedFile | UploadedFile[] | undefined =
+            req.files?.image
+          if (Array.isArray(files)) {
+            for (const file of files) {
+              await fs.unlink(file.tempFilePath)
+            }
+          } else if (files) {
+            await fs.unlink(files.tempFilePath)
+          }
+        }
+
+        //@ts-ignore
+        res.status(400).json({ error: JSON.parse(resultImage.error.message) })
+        return
+      }
     }
 
     const { id, error, message } = getUserId(req)
