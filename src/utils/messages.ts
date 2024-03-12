@@ -11,6 +11,7 @@ export const messages = {
     companyUpdated: 'Companía actualizada con éxito',
     uploadingFile: 'Imagenes subidas con éxito',
     passwordChange: 'Cambio de contraseña realizado con éxito',
+    jobCreated: 'Aviso de trabajo creado con éxito',
   },
   error: {
     generic: 'Error en el servidor',
