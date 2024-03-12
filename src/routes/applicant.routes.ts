@@ -1,7 +1,16 @@
 /**
+ *  @swagger
+ * tags:
+ *   name: Applicants
+ *   description: Endpoints relacionados con los postulantes
+ */
+
+/**
  * @swagger
  * /applicants/update:
  *   post:
+ *     tags:
+ *       - Applicants
  *     summary: Update applicant details and image
  *     description: Update the details and image of an applicant.
  *     requestBody:
@@ -76,6 +85,8 @@
  *                   description: Error message indicating the cause of the failure.
  * /applicants/:
  *   get:
+ *     tags:
+ *       - Applicants
  *     summary: Obtiene los datos del solicitante.
  *     description: Obtiene los datos del solicitante autenticado.
  *     security:

@@ -1,7 +1,16 @@
 /**
  * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: Endpoints relacionados con la autenticación de usuarios
+ */
+
+/**
+ * @swagger
  * /auth/register:
  *   post:
+ *     tags:
+ *       - Authentication
  *     summary: Registro de usuario administrador
  *     description: Crea un nuevo usuario administrador.
  *     requestBody:
@@ -32,6 +41,8 @@
  *         description: Error interno del servidor.
  * /auth/register-applicant:
  *   post:
+ *     tags:
+ *       - Authentication
  *     summary: Registro de solicitante
  *     description: Crea un nuevo solicitante.
  *     requestBody:
@@ -66,6 +77,8 @@
  *         description: Error interno del servidor.
  * /auth/register-company:
  *   post:
+ *     tags:
+ *       - Authentication
  *     summary: Registro de empresa
  *     description: Crea una nueva empresa.
  *     requestBody:
@@ -100,6 +113,8 @@
  *         description: Error interno del servidor.
  * /auth/login:
  *   post:
+ *     tags:
+ *       - Authentication
  *     summary: Iniciar sesión
  *     description: Inicia sesión en la aplicación.
  *     requestBody:
@@ -134,6 +149,8 @@
  *         description: Error interno del servidor.
  * /auth/confirm/{token}:
  *   get:
+ *     tags:
+ *       - Authentication
  *     summary: Confirmar registro
  *     description: Confirma el registro de usuario mediante un token enviado por correo electrónico.
  *     parameters:
@@ -152,6 +169,8 @@
  *         description: Error interno del servidor.
  * /auth/change-password:
  *   post:
+ *     tags:
+ *       - Authentication
  *     summary: Cambiar contraseña
  *     description: Permite a un usuario cambiar su contraseña proporcionando la contraseña antigua y la nueva.
  *     requestBody:

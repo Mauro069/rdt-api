@@ -1,7 +1,16 @@
 /**
+ *  @swagger
+ * tags:
+ *   name: Companies
+ *   description: Endpoints relacionados con las empresas
+ */
+
+/**
  * @swagger
  * /companies/update:
  *   post:
+ *     tags:
+ *       - Companies
  *     summary: Update company information
  *     description: Endpoint to update the information of a company, including its business name, description, and image.
  *     requestBody:
@@ -73,6 +82,8 @@
  *                   description: A message indicating that an internal server error occurred.
  * /companies/:
  *   get:
+ *     tags:
+ *       - Companies
  *     summary: Obtiene los datos de la companía.
  *     description: Obtiene los datos del companía autenticado.
  *     security:
