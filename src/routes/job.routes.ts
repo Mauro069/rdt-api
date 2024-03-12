@@ -225,20 +225,61 @@
  *               type: object
  *               properties:
  *                 jobs:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       _id:
- *                         type: string
- *                       company:
- *                         type: string
- *                       title:
- *                         type: string
- *                       description:
- *                         type: string
- *                       duration:
- *                         type: number
+ *                   type: object
+ *                   properties:
+ *                     docs:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           company:
+ *                             type: object
+ *                             properties:
+ *                               image:
+ *                                 type: object
+ *                                 properties:
+ *                                   secure_url:
+ *                                     type: string
+ *                                   public_id:
+ *                                     type: string
+ *                               user:
+ *                                 type: string
+ *                               businessName:
+ *                                 type: string
+ *                               description:
+ *                                 type: string
+ *                               id:
+ *                                 type: string
+ *                           title:
+ *                             type: string
+ *                           description:
+ *                             type: string
+ *                           duration:
+ *                             type: number
+ *                           creationDate:
+ *                             type: string
+ *                           status:
+ *                             type: string
+ *                           id:
+ *                             type: string
+ *                     totalDocs:
+ *                       type: integer
+ *                     limit:
+ *                       type: integer
+ *                     totalPages:
+ *                       type: integer
+ *                     page:
+ *                       type: integer
+ *                     pagingCounter:
+ *                       type: integer
+ *                     hasPrevPage:
+ *                       type: boolean
+ *                     hasNextPage:
+ *                       type: boolean
+ *                     prevPage:
+ *                       type: null
+ *                     nextPage:
+ *                       type: null
  *       '401':
  *         description: Unauthorized. Not allowed to use specified parameters.
  *         content:

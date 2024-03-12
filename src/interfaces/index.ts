@@ -11,6 +11,8 @@ export type UserStatus = 'UNVERIFIED' | 'VERIFIED' | 'SUSPENDED'
 
 export type JobStatus = 'ACTIVE' | 'INACTIVE' | 'PAUSED'
 
+export type ApplicationStatus = 'PENDING' | 'SEEN' | 'REJECTED'
+
 export interface MessageResponse {
   message: string
 }

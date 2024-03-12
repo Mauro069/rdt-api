@@ -13,6 +13,7 @@ export const messages = {
     passwordChange: 'Cambio de contraseña realizado con éxito',
     jobCreated: 'Aviso de trabajo creado con éxito',
     jobUpdated: 'Aviso de trabajo actualizado con éxito',
+    applicationCreated: 'Postulación creada con éxito',
   },
   error: {
     generic: 'Error en el servidor',
