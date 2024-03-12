@@ -12,6 +12,7 @@ export const messages = {
     uploadingFile: 'Imagenes subidas con éxito',
     passwordChange: 'Cambio de contraseña realizado con éxito',
     jobCreated: 'Aviso de trabajo creado con éxito',
+    jobUpdated: 'Aviso de trabajo actualizado con éxito',
   },
   error: {
     generic: 'Error en el servidor',
@@ -24,6 +25,7 @@ export const messages = {
     existingUser: 'Ya hay un usuario registrado con esa información',
     userNotFound: 'Usuario no encontrado',
     usersNotFound: 'No se encontraron usuarios',
+    jobNotFound: 'El aviso de trabajo no existe',
     unauthorized: 'Usuario No autorizado',
     notFound: 'No encontrado',
     idNotFound: 'ID no encontrada',

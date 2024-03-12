@@ -9,7 +9,7 @@ export type UserType = 'APPLICANT' | 'COMPANY' | 'ADMIN'
 
 export type UserStatus = 'UNVERIFIED' | 'VERIFIED' | 'SUSPENDED'
 
-export type JobStatus = 'ACTIVE' | 'INACTIVE'
+export type JobStatus = 'ACTIVE' | 'INACTIVE' | 'PAUSED'
 
 export interface MessageResponse {
   message: string

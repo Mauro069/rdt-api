@@ -14,7 +14,9 @@ const jobSchema = z.object({
     .number({
       required_error: 'Duration is required',
     })
-    .gt(1),
+    .gt(1)
+    .lt(31),
+  status: z.enum(['ACTIVE', 'INACTIVE', 'PAUSED']).default('ACTIVE'),
 })
 
 export function validateJob(input: any) {

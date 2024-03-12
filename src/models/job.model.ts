@@ -23,7 +23,7 @@ const jobSchema = new Schema({
   creationDate: { type: Date, required: true },
   status: {
     type: String,
-    enum: ['ACTIVE', 'INACTIVE'],
+    enum: ['ACTIVE', 'INACTIVE', 'PAUSED'],
     default: 'ACTIVE',
   },
 })
