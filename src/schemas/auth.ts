@@ -63,3 +63,19 @@ const companyUserSchema = z.object({
 export function validateCompanyUser(input: any) {
   return companyUserSchema.safeParse(input)
 }
+
+const changePasswordSchema = z.object({
+  oldPassword: z.string({
+    required_error: 'Old password is required.',
+  }),
+  newPassword: z.string({
+    required_error: 'New password is required.',
+  }),
+  repeatPassword: z.string({
+    required_error: 'Repeat password is required.',
+  }),
+})
+
+export function validateChangePassword(input: any) {
+  return changePasswordSchema.safeParse(input)
+}

@@ -150,6 +150,41 @@
  *         description: Error al obtener o leer el token.
  *       '500':
  *         description: Error interno del servidor.
+ * /auth/change-password:
+ *   post:
+ *     summary: Cambiar contraseña
+ *     description: Permite a un usuario cambiar su contraseña proporcionando la contraseña antigua y la nueva.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               oldPassword:
+ *                 type: string
+ *                 description: Contraseña antigua del usuario.
+ *               newPassword:
+ *                 type: string
+ *                 description: Nueva contraseña del usuario.
+ *               repeatPassword:
+ *                 type: string
+ *                 description: Confirmación de la nueva contraseña.
+ *             required:
+ *               - oldPassword
+ *               - newPassword
+ *               - repeatPassword
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '201':
+ *         description: Contraseña cambiada exitosamente.
+ *       '400':
+ *         description: Error en la solicitud debido a datos incorrectos.
+ *       '401':
+ *         description: No autorizado debido a credenciales inválidas o error de autenticación.
+ *       '500':
+ *         description: Error interno del servidor.
  */
 
 import { Router } from 'express'
@@ -169,5 +204,6 @@ router.post('/register-applicant', AuthController.registerApplicant)
 router.post('/register-company', AuthController.registerCompany)
 router.post('/login', AuthController.login)
 router.get('/confirm/:token', AuthController.confirm)
+router.post('/change-password', [authMiddleware], AuthController.changePassword)
 
 export default router

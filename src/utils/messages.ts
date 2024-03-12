@@ -10,10 +10,13 @@ export const messages = {
     applicantUpdated: 'Postulante actualizado con éxito',
     companyUpdated: 'Companía actualizada con éxito',
     uploadingFile: 'Imagenes subidas con éxito',
+    passwordChange: 'Cambio de contraseña realizado con éxito',
   },
   error: {
     generic: 'Error en el servidor',
     unverifiedUser: 'Usuario no verificado',
+    passwordCoincidence: 'Las contraseñas no coinciden',
+    passwordNotValid: 'La constraseña nueva no puede ser igual a la anterior',
     invalidCredentials: 'Credenciales inválidas',
     invalidEmail: 'Email inválido',
     invalidDNI: 'DNI inválido',
