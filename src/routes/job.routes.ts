@@ -49,7 +49,7 @@
  *       '500':
  *         description: Error interno del servidor - Error genérico.
  * /jobs:
- *   post:
+ *   get:
  *     tags:
  *       - Jobs
  *     summary: Retrieve jobs for a company
@@ -183,6 +183,80 @@
  *               properties:
  *                 message:
  *                   type: string
+ * /jobs/all:
+ *   get:
+ *     tags:
+ *       - Jobs
+ *     summary: Get all jobs
+ *     description: Retrieve all jobs with optional pagination and search parameters.
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 10
+ *         description: Number of items to return per page.
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number.
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: Field to sort by. Prefix with '-' for descending order.
+ *       - in: query
+ *         name: searchParam
+ *         schema:
+ *           type: string
+ *         description: Search parameter to filter jobs (e.g., title, description).
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: A list of jobs.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 jobs:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       company:
+ *                         type: string
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       duration:
+ *                         type: number
+ *       '401':
+ *         description: Unauthorized. Not allowed to use specified parameters.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '500':
+ *         description: Internal Server Error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 
 import { Router } from 'express'
@@ -192,6 +266,7 @@ import { JobController } from '../controllers/job'
 const router = Router()
 
 router.post('/create', [authMiddleware], JobController.create)
-router.post('/', [authMiddleware], JobController.get)
+router.get('/', [authMiddleware], JobController.get)
+router.get('/all', [authMiddleware], JobController.getAll)
 router.post('/update/:jobId', [authMiddleware], JobController.update)
 export default router
