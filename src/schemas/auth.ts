@@ -71,8 +71,8 @@ const changePasswordSchema = z.object({
   newPassword: z.string({
     required_error: 'New password is required.',
   }),
-  repeatPassword: z.string({
-    required_error: 'Repeat password is required.',
+  confirmPassword: z.string({
+    required_error: 'Confirm password is required.',
   }),
 })
 

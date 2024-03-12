@@ -19,9 +19,9 @@ export async function changePassword(
       return
     }
 
-    const { oldPassword, newPassword, repeatPassword } = result.data
+    const { oldPassword, newPassword, confirmPassword } = result.data
 
-    if (newPassword !== repeatPassword) {
+    if (newPassword !== confirmPassword) {
       res.status(401).json({ message: messages.error.passwordCoincidence })
       return
     }

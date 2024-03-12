@@ -167,13 +167,13 @@
  *               newPassword:
  *                 type: string
  *                 description: Nueva contraseña del usuario.
- *               repeatPassword:
+ *               confirmPassword:
  *                 type: string
  *                 description: Confirmación de la nueva contraseña.
  *             required:
  *               - oldPassword
  *               - newPassword
- *               - repeatPassword
+ *               - confirmPassword
  *     security:
  *       - customToken: []
  *     responses:
