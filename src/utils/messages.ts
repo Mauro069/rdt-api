@@ -27,6 +27,9 @@ export const messages = {
     userNotFound: 'Usuario no encontrado',
     usersNotFound: 'No se encontraron usuarios',
     jobNotFound: 'El aviso de trabajo no existe',
+    jobAlreadyApplicated:
+      'El aviso de trabajo ya fue postulado para ese postulante',
+    jobNotActive: 'El aviso de trabajo no está activo',
     unauthorized: 'Usuario No autorizado',
     notFound: 'No encontrado',
     idNotFound: 'ID no encontrada',

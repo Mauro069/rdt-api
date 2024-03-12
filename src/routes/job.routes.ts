@@ -214,8 +214,6 @@
  *         schema:
  *           type: string
  *         description: Search parameter to filter jobs (e.g., title, description).
- *     security:
- *       - customToken: []
  *     responses:
  *       '200':
  *         description: A list of jobs.
@@ -308,6 +306,6 @@ const router = Router()
 
 router.post('/create', [authMiddleware], JobController.create)
 router.get('/', [authMiddleware], JobController.get)
-router.get('/all', [authMiddleware], JobController.getAll)
+router.get('/all', JobController.getAll)
 router.post('/update/:jobId', [authMiddleware], JobController.update)
 export default router

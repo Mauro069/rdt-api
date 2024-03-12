@@ -6,6 +6,7 @@ import { JobModel } from '../../models/job.model'
 import { validateCreateApplication } from '../../schemas/application'
 import { ApplicantModel } from '../../models/applicant.model'
 import { ApplicationModel, IApplication } from '../../models/application.model'
+import { jobStatus } from '../../utils/constants'
 
 export async function create(req: Request, res: Response): Promise<void> {
   try {
@@ -36,6 +37,20 @@ export async function create(req: Request, res: Response): Promise<void> {
     const existingJob = await JobModel.findOne({ _id: job })
     if (!existingJob) {
       res.status(404).json({ message: messages.error.jobNotFound })
+      return
+    }
+
+    if (existingJob.status !== jobStatus.ACTIVE) {
+      res.status(404).json({ message: messages.error.jobNotActive })
+      return
+    }
+
+    const existingApplication = await ApplicationModel.findOne({
+      job: job,
+      applicant: existingApplicant._id,
+    })
+    if (existingApplication) {
+      res.status(404).json({ message: messages.error.jobAlreadyApplicated })
       return
     }
 
