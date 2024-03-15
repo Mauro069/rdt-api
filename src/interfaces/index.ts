@@ -13,6 +13,10 @@ export type JobStatus = 'ACTIVE' | 'INACTIVE' | 'PAUSED' | 'DELETED'
 
 export type ApplicationStatus = 'PENDING' | 'SEEN' | 'REJECTED'
 
+export interface IFilter extends Document {
+  description: string
+}
+
 export interface MessageResponse {
   message: string
 }
