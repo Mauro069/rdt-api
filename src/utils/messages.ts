@@ -8,6 +8,7 @@ export const messages = {
     updateUser: 'Usuario actualizado correctamente',
     foundUser: 'Usuario encontrado',
     applicantUpdated: 'Postulante actualizado con éxito',
+    applicationUpdated: 'Aviso actualizado con éxito',
     companyUpdated: 'Companía actualizada con éxito',
     uploadingFile: 'Imagenes subidas con éxito',
     passwordChange: 'Cambio de contraseña realizado con éxito',
@@ -29,6 +30,7 @@ export const messages = {
     jobNotFound: 'El aviso de trabajo no existe',
     jobAlreadyApplicated:
       'El aviso de trabajo ya fue postulado para ese postulante',
+    jobNotFoundInCompany: 'El aviso no corresponde a la companía',
     jobNotActive: 'El aviso de trabajo no está activo',
     unauthorized: 'Usuario No autorizado',
     notFound: 'No encontrado',
@@ -37,6 +39,7 @@ export const messages = {
     tokenNotFound: 'Token no encontrado',
     tokenNotValid: 'Token no valido',
     applicantNotFound: 'Postulante no encontrado',
+    applicationNotFound: 'Postulación no encontrada',
     companyNotFound: 'Companía no encontrada',
     uploadingFile: 'Error subiendo archivo',
     notAllowByCors: 'Error de CORS',

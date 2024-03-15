@@ -256,6 +256,85 @@
  *               properties:
  *                 message:
  *                   type: string
+ * /applications/update/{applicationId}:
+ *   post:
+ *     tags:
+ *       - Applications
+ *     summary: Actualizar solicitud de aplicación
+ *     parameters:
+ *       - in: path
+ *         name: applicationId
+ *         required: true
+ *         description: ID de la solicitud de aplicación a actualizar
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               rejectionReason:
+ *                 type: string
+ *                 description: Razón de rechazo de la solicitud (opcional)
+ *               status:
+ *                 type: string
+ *                 enum: [PENDING, SEEN, REJECTED]
+ *                 description: Estado de la solicitud (opcional)
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       201:
+ *         description: Solicitud de aplicación actualizada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: Parámetros de entrada inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     rejectionReason:
+ *                       type: string
+ *       401:
+ *         description: No autorizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       404:
+ *         description: No encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 error:
+ *                   type: object
  */
 
 import { Router } from 'express'
@@ -267,5 +346,10 @@ const router = Router()
 router.post('/create', [authMiddleware], ApplicationController.create)
 router.get('/', [authMiddleware], ApplicationController.get)
 router.get('/all', [authMiddleware], ApplicationController.getAll)
+router.post(
+  '/update/:applicationId',
+  [authMiddleware],
+  ApplicationController.update
+)
 
 export default router

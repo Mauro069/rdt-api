@@ -28,3 +28,14 @@ const applicationSchema = z.object({
 export function validateApplication(input: any) {
   return applicationSchema.partial().safeParse(input)
 }
+
+const applicationUodateSchema = z.object({
+  rejectionReason: z.string({
+    required_error: 'Rejection reason is required.',
+  }),
+  status: z.enum(['PENDING', 'SEEN', 'REJECTED']).default('PENDING'),
+})
+
+export function validateUpdateApplication(input: any) {
+  return applicationUodateSchema.partial().safeParse(input)
+}
