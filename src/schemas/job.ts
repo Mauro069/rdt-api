@@ -16,7 +16,7 @@ const jobSchema = z.object({
     })
     .gt(1)
     .lt(31),
-  status: z.enum(['ACTIVE', 'INACTIVE', 'PAUSED']).default('ACTIVE'),
+  status: z.enum(['ACTIVE', 'INACTIVE', 'PAUSED', 'DELETED']).default('ACTIVE'),
 })
 
 export function validateJob(input: any) {

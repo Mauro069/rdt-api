@@ -296,6 +296,104 @@
  *               properties:
  *                 message:
  *                   type: string
+ * /jobs/applicants/{jobId}:
+ *   get:
+ *     tags:
+ *       - Jobs
+ *     summary: Obtener solicitantes por ID de trabajo
+ *     description: Obtiene la lista de solicitantes para un trabajo específico.
+ *     parameters:
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         description: ID del trabajo del cual obtener solicitantes
+ *         schema:
+ *           type: string
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       200:
+ *         description: Lista de solicitantes obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 applications:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                         description: ID de la aplicación
+ *                       job:
+ *                         type: string
+ *                         description: ID del trabajo al que se aplica
+ *                       applicant:
+ *                         type: object
+ *                         properties:
+ *                           _id:
+ *                             type: string
+ *                             description: ID del solicitante
+ *                           user:
+ *                             type: string
+ *                             description: ID del usuario asociado al solicitante
+ *                           image:
+ *                             type: object
+ *                             properties:
+ *                               secure_url:
+ *                                 type: string
+ *                                 description: URL segura de la imagen
+ *                               public_id:
+ *                                 type: string
+ *                                 description: ID público de la imagen
+ *                           name:
+ *                             type: string
+ *                             description: Nombre del solicitante
+ *                           lastName:
+ *                             type: string
+ *                             description: Apellido del solicitante
+ *                       rejectionReason:
+ *                         type: string
+ *                         description: Razón de rechazo (si aplicable)
+ *                       status:
+ *                         type: string
+ *                         enum: [PENDING, SEEN, REJECTED]
+ *                         description: Estado de la aplicación
+ *                       creationDate:
+ *                         type: string
+ *                         format: date-time
+ *                         description: Fecha de creación de la aplicación
+ *       401:
+ *         description: No autorizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       404:
+ *         description: No encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 error:
+ *                   type: object
  */
 
 import { Router } from 'express'
@@ -308,4 +406,6 @@ router.post('/create', [authMiddleware], JobController.create)
 router.get('/', [authMiddleware], JobController.get)
 router.get('/all', JobController.getAll)
 router.post('/update/:jobId', [authMiddleware], JobController.update)
+router.get('/applicants/:jobId', [authMiddleware], JobController.getApplicants)
+
 export default router

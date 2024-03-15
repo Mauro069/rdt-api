@@ -9,7 +9,7 @@ export type UserType = 'APPLICANT' | 'COMPANY' | 'ADMIN'
 
 export type UserStatus = 'UNVERIFIED' | 'VERIFIED' | 'SUSPENDED'
 
-export type JobStatus = 'ACTIVE' | 'INACTIVE' | 'PAUSED'
+export type JobStatus = 'ACTIVE' | 'INACTIVE' | 'PAUSED' | 'DELETED'
 
 export type ApplicationStatus = 'PENDING' | 'SEEN' | 'REJECTED'
 

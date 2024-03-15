@@ -4,6 +4,7 @@ import { messages } from '../../utils/messages'
 import { JobModel } from '../../models/job.model'
 import { getSearhParams } from '../../utils/getSearhParams'
 import { getOrderBy } from '../../utils/getOrderBy'
+import { jobStatus } from '../../utils/constants'
 
 export async function getAll(req: Request, res: Response): Promise<void> {
   try {
@@ -21,10 +22,16 @@ export async function getAll(req: Request, res: Response): Promise<void> {
     options.sort = getOrderBy(req, JobModel.schema.obj)
 
     // @ts-ignore
-    const jobs = await JobModel.paginate(searchParam, {
-      ...options,
-      populate: 'company',
-    })
+    const jobs = await JobModel.paginate(
+      {
+        ...searchParam,
+        status: { $ne: jobStatus.DELETED }, // Excluir trabajos con estado DELETED
+      },
+      {
+        ...options,
+        populate: 'company',
+      }
+    )
 
     res.status(200).json({ jobs })
   } catch (error) {

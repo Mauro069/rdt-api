@@ -16,4 +16,5 @@ export const jobStatus: { [key: string]: JobStatus } = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
   PAUSED: 'PAUSED',
+  DELETED: 'DELETED',
 }
