@@ -71,6 +71,7 @@ export const messages = {
     tokenNotFound: 'Token no encontrado',
     tokenNotValid: 'Token no valido',
     applicantNotFound: 'Postulante no encontrado',
+    applicantWithCVUncomplete: 'Postulante no posee CV completo',
     applicationNotFound: 'Postulación no encontrada',
     companyNotFound: 'Companía no encontrada',
     uploadingFile: 'Error subiendo archivo',

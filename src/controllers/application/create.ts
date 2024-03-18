@@ -4,9 +4,11 @@ import { messages } from '../../utils/messages'
 import { getUserId } from '../../utils/getUserId'
 import { JobModel } from '../../models/job.model'
 import { validateCreateApplication } from '../../schemas/application'
-import { ApplicantModel } from '../../models/applicant.model'
+import { ApplicantModel, IApplicant } from '../../models/applicant.model'
 import { ApplicationModel, IApplication } from '../../models/application.model'
 import { jobStatus } from '../../utils/constants'
+import { WorkExperienceModel } from '../../models/workExperience.model'
+import { EducationModel } from '../../models/education.model'
 
 export async function create(req: Request, res: Response): Promise<void> {
   try {
@@ -54,6 +56,13 @@ export async function create(req: Request, res: Response): Promise<void> {
       return
     }
 
+    if (!(await hasCompleteCv(existingApplicant))) {
+      res
+        .status(404)
+        .json({ message: messages.error.applicantWithCVUncomplete })
+      return
+    }
+
     const newApplication: IApplication = new ApplicationModel({
       ...result.data,
       job: existingJob._id,
@@ -67,4 +76,22 @@ export async function create(req: Request, res: Response): Promise<void> {
   } catch (error) {
     res.status(500).json({ message: messages.error.generic, error })
   }
+}
+
+const hasCompleteCv = async (applicant: IApplicant) => {
+  const hasFilledFields: boolean = Object.keys(applicant.toJSON())
+    .filter((key) => key !== 'linkedIn' && key !== 'webSite')
+    .every(
+      (key) =>
+        applicant[key as keyof IApplicant] !== undefined &&
+        applicant[key as keyof IApplicant] !== null &&
+        applicant[key as keyof IApplicant] !== ''
+    )
+
+  const workExperiences = await WorkExperienceModel.find({
+    applicant: applicant.id,
+  })
+  const educations = await EducationModel.find({ applicant: applicant.id })
+
+  return hasFilledFields && workExperiences.length > 0 && educations.length > 0
 }
