@@ -5,6 +5,7 @@ import applicationRoutes from './routes/application.routes'
 import companyRoutes from './routes/company.routes'
 import jobRoutes from './routes/job.routes'
 import filterRoutes from './routes/filter.routes'
+import provinceRoutes from './routes/province.routes'
 import { connectToDatabase } from './lib/mongodb'
 import { setupSwaggerDocs } from './lib/swagger'
 import { env } from './config'
@@ -33,6 +34,7 @@ app.use('/applications', applicationRoutes)
 app.use('/companies', companyRoutes)
 app.use('/jobs', jobRoutes)
 app.use('/filters', filterRoutes)
+app.use('/provinces', provinceRoutes)
 
 setupSwaggerDocs(app)
 

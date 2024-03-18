@@ -14,6 +14,9 @@ export const messages = {
     passwordChange: 'Cambio de contraseña realizado con éxito',
     jobCreated: 'Aviso de trabajo creado con éxito',
     jobUpdated: 'Aviso de trabajo actualizado con éxito',
+    provinceCreated: 'Provincia creada con éxito',
+    provinceUpdated: 'Provincia actualizada con éxito',
+    provinceDeleted: 'Provincia eliminada con éxito',
     applicationCreated: 'Postulación creada con éxito',
   },
   error: {
@@ -27,6 +30,7 @@ export const messages = {
     existingUser: 'Ya hay un usuario registrado con esa información',
     userNotFound: 'Usuario no encontrado',
     usersNotFound: 'No se encontraron usuarios',
+    provinceNotFound: 'Provincia no encontrada',
     jobNotFound: 'El aviso de trabajo no existe',
     jobAlreadyApplicated:
       'El aviso de trabajo ya fue postulado para ese postulante',
@@ -39,7 +43,6 @@ export const messages = {
     tokenNotFound: 'Token no encontrado',
     tokenNotValid: 'Token no valido',
     applicantNotFound: 'Postulante no encontrado',
-    provinceNotFound: 'Provincia no encontrada',
     genderNotFound: 'Género no encontrado',
     maritalStatusNotFound: 'Estado civil no encontrado',
     applicationNotFound: 'Postulación no encontrada',
