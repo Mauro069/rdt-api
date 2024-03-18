@@ -24,6 +24,18 @@ const applicantSchema = z.object({
       if (Array.isArray(file)) return true
       return ACCEPTED_IMAGE_TYPES.includes(file.mimetype)
     }, '.jpg, .jpeg, .png and .webp files are accepted.'),
+  phoneNumber: z.string(),
+  address: z.string(),
+  postalCode: z.string(),
+  province: z.string(), // O puedes usar z.string() si no tienes definido el esquema de ObjectId
+  cityRegion: z.string(),
+  gender: z.string(), // O puedes usar z.string() si no tienes definido el esquema de ObjectId
+  birthDate: z.coerce.date(),
+  birthPlace: z.string(),
+  nationality: z.string(),
+  maritalStatus: z.string(), // O puedes usar z.string() si no tienes definido el esquema de ObjectId
+  linkedIn: z.string(),
+  webSite: z.string(),
 })
 
 export function validateApplicant(input: any) {

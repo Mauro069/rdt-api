@@ -41,9 +41,8 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
-    existingJob.title = result.data.title || existingJob.title
-    existingJob.description = result.data.description || existingJob.description
-    existingJob.status = result.data.status || existingJob.status
+    // Actualizo el documento existente con los nuevos valores
+    Object.assign(existingJob, result.data)
 
     await existingJob.save()
 

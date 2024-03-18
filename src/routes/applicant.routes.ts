@@ -30,6 +30,43 @@
  *                 type: string
  *                 format: binary
  *                 description: The image file of the applicant.
+ *               phoneNumber:
+ *                 type: string
+ *                 description: The phone number of the applicant.
+ *               address:
+ *                 type: string
+ *                 description: The address of the applicant.
+ *               postalCode:
+ *                 type: string
+ *                 description: The postal code of the applicant.
+ *               province:
+ *                 type: string
+ *                 description: The province of the applicant.
+ *               cityRegion:
+ *                 type: string
+ *                 description: The city or region of the applicant.
+ *               gender:
+ *                 type: string
+ *                 description: The gender of the applicant.
+ *               birthDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The birth date of the applicant in ISO 8601 format (YYYY-MM-DD).
+ *               birthPlace:
+ *                 type: string
+ *                 description: The birth place of the applicant.
+ *               nationality:
+ *                 type: string
+ *                 description: The nationality of the applicant.
+ *               maritalStatus:
+ *                 type: string
+ *                 description: The marital status of the applicant.
+ *               linkedIn:
+ *                 type: string
+ *                 description: The LinkedIn profile of the applicant.
+ *               webSite:
+ *                 type: string
+ *                 description: The website of the applicant.
  *     security:
  *       - customToken: []
  *     responses:

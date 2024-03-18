@@ -55,6 +55,9 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
+    // Actualizo el documento existente con los nuevos valores
+    Object.assign(existingCompany, result.data)
+
     if (req.files?.image) {
       const file: UploadedFile | UploadedFile[] | undefined = req.files?.image
       const image = file instanceof Array ? file[0] : file
@@ -68,16 +71,6 @@ export async function update(req: Request, res: Response): Promise<void> {
       }
 
       if (uploadResult.image) existingCompany.image = uploadResult.image
-    }
-
-    if (result.data.hasOwnProperty('businessName')) {
-      if (result.data.businessName)
-        existingCompany.businessName = result.data.businessName
-    }
-
-    if (result.data.hasOwnProperty('description')) {
-      if (result.data.description)
-        existingCompany.description = result.data.description
     }
 
     await existingCompany.save()

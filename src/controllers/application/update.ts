@@ -48,10 +48,8 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
-    existingApplication.rejectionReason =
-      result.data.rejectionReason || existingApplication.rejectionReason
-    existingApplication.status =
-      result.data.status || existingApplication.status
+    // Actualizo el documento existente con los nuevos valores
+    Object.assign(existingApplication, result.data)
 
     await existingApplication.save()
 
