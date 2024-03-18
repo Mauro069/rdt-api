@@ -8,9 +8,9 @@ import { validateApplicant } from '../../schemas/applicant'
 import { UploadImageResult, uploadImage } from '../../utils/uploadImage'
 import { UploadedFile } from 'express-fileupload'
 import { deleteFile } from '../../lib/cloudinary'
-import { ProvinceModel } from '../../models/province'
-import { GenderModel } from '../../models/gender'
-import { MaritalStatusModel } from '../../models/maritalStatus'
+import { ProvinceModel } from '../../models/province.model'
+import { GenderModel } from '../../models/gender.model'
+import { MaritalStatusModel } from '../../models/maritalStatus.model'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {

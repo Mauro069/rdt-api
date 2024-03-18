@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 
 import { messages } from '../../utils/messages'
-import { ProvinceModel } from '../../models/province.model'
 import { isValidObjectId } from 'mongoose'
+import { MaritalStatusModel } from '../../models/maritalStatus.model'
 
 export async function deleteIt(req: Request, res: Response): Promise<void> {
   try {
@@ -12,13 +12,13 @@ export async function deleteIt(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const deletedProvince = await ProvinceModel.findByIdAndDelete(id)
-    if (!deletedProvince) {
-      res.status(404).json({ message: messages.error.provinceNotFound })
+    const deletedMaritalStatus = await MaritalStatusModel.findByIdAndDelete(id)
+    if (!deletedMaritalStatus) {
+      res.status(404).json({ message: messages.error.maritalStatusNotFound })
       return
     }
 
-    res.status(201).json({ message: messages.success.provinceDeleted })
+    res.status(201).json({ message: messages.success.maritalStatusDeleted })
   } catch (error) {
     res.status(500).json({ message: messages.error.generic, error })
   }

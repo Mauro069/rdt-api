@@ -6,6 +6,11 @@ import companyRoutes from './routes/company.routes'
 import jobRoutes from './routes/job.routes'
 import filterRoutes from './routes/filter.routes'
 import provinceRoutes from './routes/province.routes'
+import genderRoutes from './routes/gender.routers'
+import employmentTypeRoutes from './routes/employmentType.routes'
+import competenceRoutes from './routes/competence.routes'
+import workModalityRoutes from './routes/workModality.routes'
+import maritalStatusRoutes from './routes/maritalStatus.routes'
 import { connectToDatabase } from './lib/mongodb'
 import { setupSwaggerDocs } from './lib/swagger'
 import { env } from './config'
@@ -35,6 +40,11 @@ app.use('/companies', companyRoutes)
 app.use('/jobs', jobRoutes)
 app.use('/filters', filterRoutes)
 app.use('/provinces', provinceRoutes)
+app.use('/gender', genderRoutes)
+app.use('/employment-type', employmentTypeRoutes)
+app.use('/competence', competenceRoutes)
+app.use('/work-modality', workModalityRoutes)
+app.use('/marital-status', maritalStatusRoutes)
 
 setupSwaggerDocs(app)
 

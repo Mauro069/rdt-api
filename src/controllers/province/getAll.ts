@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 import { messages } from '../../utils/messages'
-import { ProvinceModel } from '../../models/province'
+import { ProvinceModel } from '../../models/province.model'
 
 export async function getAll(req: Request, res: Response): Promise<void> {
   try {

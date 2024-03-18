@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 
 import { messages } from '../../utils/messages'
-import { ProvinceModel } from '../../models/province.model'
 import { isValidObjectId } from 'mongoose'
+import { MaritalStatusModel } from '../../models/maritalStatus.model'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {
@@ -13,18 +13,18 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const updatedProvince = await ProvinceModel.findByIdAndUpdate(
+    const updatedMaritalStatus = await MaritalStatusModel.findByIdAndUpdate(
       id,
       { description },
       { new: true }
     )
 
-    if (!updatedProvince) {
-      res.status(404).json({ message: messages.error.provinceNotFound })
+    if (!updatedMaritalStatus) {
+      res.status(404).json({ message: messages.error.maritalStatusNotFound })
       return
     }
 
-    res.status(201).json({ message: messages.success.provinceUpdated })
+    res.status(201).json({ message: messages.success.maritalStatusUpdated })
   } catch (error) {
     res.status(500).json({ message: messages.error.generic, error })
   }
