@@ -197,6 +197,251 @@
  *                 message:
  *                   type: string
  *                   description: Mensaje de error que indica la causa del fallo.
+ * /applicants/add-education:
+ *   post:
+ *     summary: Add education details for an applicant.
+ *     description: Add education details including institution, degree, start date, end date, and description for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               institution:
+ *                 type: string
+ *                 description: The name of the institution.
+ *               degree:
+ *                 type: string
+ *                 description: The degree obtained.
+ *               startDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The start date of education (optional).
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The end date of education (optional).
+ *               description:
+ *                 type: string
+ *                 description: Description of the education (optional).
+ *                 maxLength: 2000
+ *     responses:
+ *       '201':
+ *         description: Education details added successfully.
+ *       '400':
+ *         description: Bad request. The request body does not conform to the expected schema.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/add-education/{educationId}:
+ *   put:
+ *     summary: Update education details for an applicant.
+ *     description: Update education details including institution, degree, start date, end date, and description for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: educationId
+ *         required: true
+ *         description: ID of the education record to be updated.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               institution:
+ *                 type: string
+ *                 description: The name of the institution.
+ *               degree:
+ *                 type: string
+ *                 description: The degree obtained.
+ *               startDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The start date of education (optional).
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The end date of education (optional).
+ *               description:
+ *                 type: string
+ *                 description: Description of the education (optional).
+ *                 maxLength: 2000
+ *     responses:
+ *       '201':
+ *         description: Education details updated successfully.
+ *       '400':
+ *         description: Bad request. The request body does not conform to the expected schema.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant or education not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/get-education:
+ *   get:
+ *     summary: Get education details for an applicant.
+ *     description: Retrieve education details including institution, degree, start date, end date, and description for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: Education details retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 educations:
+ *                   type: array
+ *                   description: List of education records.
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       institution:
+ *                         type: string
+ *                         description: The name of the institution.
+ *                       degree:
+ *                         type: string
+ *                         description: The degree obtained.
+ *                       startDate:
+ *                         type: string
+ *                         format: date
+ *                         description: The start date of education.
+ *                       endDate:
+ *                         type: string
+ *                         format: date
+ *                         description: The end date of education.
+ *                       description:
+ *                         type: string
+ *                         description: Description of the education.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/get-education/{educationId}:
+ *   get:
+ *     summary: Get education details by ID.
+ *     description: Retrieve education details by its ID.
+ *     tags:
+ *       - Applicants
+ *     parameters:
+ *       - in: path
+ *         name: educationId
+ *         required: true
+ *         description: ID of the education record to retrieve.
+ *         schema:
+ *           type: string
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: Education details retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 institution:
+ *                   type: string
+ *                   description: The name of the institution.
+ *                 degree:
+ *                   type: string
+ *                   description: The degree obtained.
+ *                 startDate:
+ *                   type: string
+ *                   format: date
+ *                   description: The start date of education.
+ *                 endDate:
+ *                   type: string
+ *                   format: date
+ *                   description: The end date of education.
+ *                 description:
+ *                   type: string
+ *                   description: Description of the education.
+ *       '404':
+ *         description: Education not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating that the education was not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *
+ * /applicants/delete-education/{educationId}:
+ *   delete:
+ *     summary: Delete education by ID.
+ *     description: Delete education details by its ID.
+ *     tags:
+ *       - Applicants
+ *     parameters:
+ *       - in: path
+ *         name: educationId
+ *         required: true
+ *         description: ID of the education record to delete.
+ *         schema:
+ *           type: string
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '201':
+ *         description: Education deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message indicating that the education was deleted.
+ *       '404':
+ *         description: Education not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating that the education was not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
  */
 
 import { Router } from 'express'
@@ -213,5 +458,30 @@ router.post(
 )
 
 router.get('/', [authMiddleware], ApplicantController.get)
+router.post(
+  '/add-education',
+  [authMiddleware],
+  ApplicantController.addEducation
+)
+router.put(
+  '/add-education/:educationId',
+  [authMiddleware],
+  ApplicantController.updateEducation
+)
+router.get(
+  '/get-education',
+  [authMiddleware],
+  ApplicantController.getEducations
+)
+router.get(
+  '/get-education/:educationId',
+  [authMiddleware],
+  ApplicantController.getEducation
+)
+router.delete(
+  '/delete-education/:educationId',
+  [authMiddleware],
+  ApplicantController.deleteEducation
+)
 
 export default router

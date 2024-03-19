@@ -41,3 +41,23 @@ const applicantSchema = z.object({
 export function validateApplicant(input: any) {
   return applicantSchema.partial().safeParse(input)
 }
+
+const applicantEducationSchema = z.object({
+  institution: z.string({
+    required_error: 'Institution is required.',
+  }),
+  degree: z.string({
+    required_error: 'Degree is required.',
+  }),
+  startDate: z.coerce.date().optional(),
+  endDate: z.coerce.date().optional(),
+  description: z.string().max(2000).optional(),
+})
+
+export function validateApplicantEducation(input: any) {
+  return applicantEducationSchema.safeParse(input)
+}
+
+export function validateApplicantEducationUpdate(input: any) {
+  return applicantEducationSchema.partial().safeParse(input)
+}
