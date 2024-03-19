@@ -19,6 +19,8 @@ import { getLanguages } from './getLanguages'
 import { getLanguage } from './getLanguage'
 import { deleteLanguage } from './deleteLanguage'
 
+import { getCV } from './getCV'
+
 export const ApplicantController = {
   update,
   get,
@@ -37,4 +39,5 @@ export const ApplicantController = {
   getLanguages,
   getLanguage,
   deleteLanguage,
+  getCV,
 }

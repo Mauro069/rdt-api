@@ -995,6 +995,153 @@
  *         description: Not found. Language record not found or not associated with the authenticated applicant.
  *       '500':
  *         description: Internal server error. An unexpected error occurred.
+ * /applicants/get-cv/{applicantId}:
+ *   get:
+ *     summary: Get CV of an applicant.
+ *     description: Retrieve the CV of a specific applicant, including their personal information, work experiences, educations, and languages.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: applicantId
+ *         required: true
+ *         description: ID of the applicant to retrieve the CV for.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: CV retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 applicant:
+ *                   type: object
+ *                   description: Information about the applicant.
+ *                   properties:
+ *                     user:
+ *                       type: string
+ *                       description: ID of the user associated with the applicant.
+ *                     image:
+ *                       type: object
+ *                       properties:
+ *                         secure_url:
+ *                           type: string
+ *                           description: URL of the applicant's image.
+ *                         public_id:
+ *                           type: string
+ *                           description: Public ID of the applicant's image.
+ *                     name:
+ *                       type: string
+ *                       description: Name of the applicant.
+ *                     lastName:
+ *                       type: string
+ *                       description: Last name of the applicant.
+ *                     phoneNumber:
+ *                       type: string
+ *                       description: Phone number of the applicant.
+ *                     address:
+ *                       type: string
+ *                       description: Address of the applicant.
+ *                     postalCode:
+ *                       type: string
+ *                       description: Postal code of the applicant's address.
+ *                     province:
+ *                       type: object
+ *                       properties:
+ *                         id:
+ *                           type: string
+ *                           description: ID of the province.
+ *                         description:
+ *                           type: string
+ *                           description: Description of the province.
+ *                       description: Province of the applicant.
+ *                     cityRegion:
+ *                       type: string
+ *                       description: City or region of the applicant's address.
+ *                     gender:
+ *                       type: object
+ *                       properties:
+ *                         id:
+ *                           type: string
+ *                           description: ID of the gender.
+ *                         description:
+ *                           type: string
+ *                           description: Description of the gender.
+ *                       description: Gender of the applicant.
+ *                     birthDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Birth date of the applicant.
+ *                     birthPlace:
+ *                       type: string
+ *                       description: Birth place of the applicant.
+ *                     nationality:
+ *                       type: string
+ *                       description: Nationality of the applicant.
+ *                     maritalStatus:
+ *                       type: object
+ *                       properties:
+ *                         id:
+ *                           type: string
+ *                           description: ID of the marital status.
+ *                         description:
+ *                           type: string
+ *                           description: Description of the marital status.
+ *                       description: Marital status of the applicant.
+ *                     linkedIn:
+ *                       type: string
+ *                       description: LinkedIn profile of the applicant.
+ *                     webSite:
+ *                       type: string
+ *                       description: Website of the applicant.
+ *                 workExperiences:
+ *                   type: array
+ *                   description: List of work experiences of the applicant.
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         description: ID of the work experience.
+ *                       description:
+ *                         type: string
+ *                         description: Description of the work experience.
+ *                 educations:
+ *                   type: array
+ *                   description: List of educations of the applicant.
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         description: ID of the education.
+ *                       description:
+ *                         type: string
+ *                         description: Description of the education.
+ *                 languages:
+ *                   type: array
+ *                   description: List of languages of the applicant.
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         description: ID of the language.
+ *                       description:
+ *                         type: string
+ *                         description: Description of the language.
+ *       '400':
+ *         description: Bad request. The provided applicant ID is not valid.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
  */
 
 import { Router } from 'express'
@@ -1080,5 +1227,7 @@ router.delete(
   [authMiddleware],
   ApplicantController.deleteLanguage
 )
+
+router.get('/get-cv/:applicantId', [authMiddleware], ApplicantController.getCV)
 
 export default router
