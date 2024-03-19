@@ -776,6 +776,225 @@
  *                 message:
  *                   type: string
  *                   description: Error message indicating the cause of the failure.
+ * /applicants/add-language:
+ *   post:
+ *     summary: Add language details for an applicant.
+ *     description: Add language details including competence and language type for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               competence:
+ *                 type: string
+ *                 description: The competence of the applicant in the language.
+ *               language:
+ *                 type: string
+ *                 description: The language type.
+ *     responses:
+ *       '201':
+ *         description: Language details added successfully.
+ *       '400':
+ *         description: Bad request. The request body does not conform to the expected schema.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant not found or competence not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/add-language/{languageId}:
+ *   put:
+ *     summary: Update language details for an applicant.
+ *     description: Update language details including competence and language type for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: languageId
+ *         required: true
+ *         description: ID of the language record to be updated.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               competence:
+ *                 type: string
+ *                 description: The competence of the applicant in the language.
+ *               language:
+ *                 type: string
+ *                 description: The language type.
+ *     responses:
+ *       '201':
+ *         description: Language details updated successfully.
+ *       '400':
+ *         description: Bad request. The request body does not conform to the expected schema.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant not found, language not found, or competence not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/get-language:
+ *   get:
+ *     summary: Get all languages for the authenticated applicant.
+ *     description: Retrieve all languages associated with the authenticated applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved languages.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 languages:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                         description: The unique identifier for the language.
+ *                       language:
+ *                         type: string
+ *                         description: The language.
+ *                       competence:
+ *                         type: object
+ *                         properties:
+ *                           _id:
+ *                             type: string
+ *                             description: The unique identifier for the competence.
+ *                           name:
+ *                             type: string
+ *                             description: The name of the competence.
+ *                           level:
+ *                             type: string
+ *                             description: The level of the competence.
+ *                       applicant:
+ *                         type: string
+ *                         description: The ID of the applicant to whom the language belongs.
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                         description: The date and time when the language was created.
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         description: The date and time when the language was last updated.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant not found or no languages associated with the applicant.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/get-language/{languageId}:
+ *   get:
+ *     summary: Get language details for a specific language of the authenticated applicant.
+ *     description: Retrieve language details for a specific language associated with the authenticated applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: languageId
+ *         required: true
+ *         description: ID of the language record to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Language details retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: The unique identifier for the language.
+ *                 language:
+ *                   type: string
+ *                   description: The language.
+ *                 competence:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       description: The unique identifier for the competence.
+ *                     name:
+ *                       type: string
+ *                       description: The name of the competence.
+ *                     level:
+ *                       type: string
+ *                       description: The level of the competence.
+ *                 applicant:
+ *                   type: string
+ *                   description: The ID of the applicant to whom the language belongs.
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: The date and time when the language was created.
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *                   description: The date and time when the language was last updated.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Language not found or not associated with the authenticated applicant.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/delete-language/{languageId}:
+ *   delete:
+ *     summary: Delete a language record.
+ *     description: Delete a language record associated with the authenticated applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: languageId
+ *         required: true
+ *         description: ID of the language record to delete.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '201':
+ *         description: Language record deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message indicating that the language record was deleted.
+ *       '400':
+ *         description: Bad request. The provided language ID is not valid.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Language record not found or not associated with the authenticated applicant.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
  */
 
 import { Router } from 'express'
@@ -842,6 +1061,24 @@ router.delete(
   '/delete-work-experience/:workExperienceId',
   [authMiddleware],
   ApplicantController.deleteWorkExperience
+)
+
+router.post('/add-language', [authMiddleware], ApplicantController.addLanguage)
+router.put(
+  '/add-language/:languageId',
+  [authMiddleware],
+  ApplicantController.updateLanguage
+)
+router.get('/get-language', [authMiddleware], ApplicantController.getLanguages)
+router.get(
+  '/get-language/:languageId',
+  [authMiddleware],
+  ApplicantController.getLanguage
+)
+router.delete(
+  '/delete-language/:languageId',
+  [authMiddleware],
+  ApplicantController.deleteLanguage
 )
 
 export default router

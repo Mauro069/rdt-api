@@ -90,3 +90,20 @@ export function validateApplicantWorkExperience(input: any) {
 export function validateApplicantWorkExperienceUpdate(input: any) {
   return applicantWorkExperienceSchema.partial().safeParse(input)
 }
+
+const applicantLanguageSchema = z.object({
+  competence: z.string({
+    required_error: 'Competence is required.',
+  }),
+  language: z.string({
+    required_error: 'Language type is required.',
+  }),
+})
+
+export function validateApplicantLanguage(input: any) {
+  return applicantLanguageSchema.safeParse(input)
+}
+
+export function validateApplicantLanguageUpdate(input: any) {
+  return applicantLanguageSchema.partial().safeParse(input)
+}

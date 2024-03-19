@@ -1,5 +1,6 @@
 import { update } from './update'
 import { get } from './get'
+
 import { addEducation } from './addEducation'
 import { updateEducation } from './updateEducation'
 import { getEducations } from './getEducations'
@@ -11,6 +12,12 @@ import { updateWorkExperience } from './updateWorkExperience'
 import { getWorkExperiences } from './getWorkExperiences'
 import { getWorkExperience } from './getWorkExperience'
 import { deleteWorkExperience } from './deleteWorkExperience'
+
+import { addLanguage } from './addLanguage'
+import { updateLanguage } from './updateLanguage'
+import { getLanguages } from './getLanguages'
+import { getLanguage } from './getLanguage'
+import { deleteLanguage } from './deleteLanguage'
 
 export const ApplicantController = {
   update,
@@ -25,4 +32,9 @@ export const ApplicantController = {
   getWorkExperiences,
   getWorkExperience,
   deleteWorkExperience,
+  addLanguage,
+  updateLanguage,
+  getLanguages,
+  getLanguage,
+  deleteLanguage,
 }
