@@ -442,6 +442,340 @@
  *                 message:
  *                   type: string
  *                   description: Error message indicating the cause of the failure.
+ * /applicants/add-work-experience:
+ *   post:
+ *     summary: Add work experience for an applicant.
+ *     description: Add work experience including position, employment type, company name, location, work modality, industry, description, start date, end date, and skills for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               position:
+ *                 type: string
+ *                 description: The position held in the job.
+ *               employmentType:
+ *                 type: string
+ *                 description: The type of employment.
+ *               companyName:
+ *                 type: string
+ *                 description: The name of the company.
+ *               location:
+ *                 type: string
+ *                 description: The location of the job (optional).
+ *               workModality:
+ *                 type: string
+ *                 description: The work modality (e.g., full-time, part-time).
+ *               industry:
+ *                 type: string
+ *                 description: The industry of the job (optional).
+ *               description:
+ *                 type: string
+ *                 description: Description of the work experience (optional).
+ *                 maxLength: 2000
+ *               startDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The start date of the work experience (optional).
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The end date of the work experience (optional).
+ *               skills:
+ *                 type: string
+ *                 description: Skills acquired during the work experience (optional).
+ *     responses:
+ *       '201':
+ *         description: Work experience added successfully.
+ *       '400':
+ *         description: Bad request. The request body does not conform to the expected schema.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant or employment type or work modality not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/add-work-experience/{workExperienceId}:
+ *   put:
+ *     summary: Update work experience details for an applicant.
+ *     description: Update work experience details including position, employment type, company name, location, work modality, industry, description, start date, end date, and skills for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: workExperienceId
+ *         required: true
+ *         description: ID of the work experience record to be updated.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               position:
+ *                 type: string
+ *                 description: The position held in the job.
+ *               employmentType:
+ *                 type: string
+ *                 description: The type of employment.
+ *               companyName:
+ *                 type: string
+ *                 description: The name of the company.
+ *               location:
+ *                 type: string
+ *                 description: The location of the job (optional).
+ *               workModality:
+ *                 type: string
+ *                 description: The work modality (e.g., full-time, part-time).
+ *               industry:
+ *                 type: string
+ *                 description: The industry of the job (optional).
+ *               description:
+ *                 type: string
+ *                 description: Description of the work experience (optional).
+ *                 maxLength: 2000
+ *               startDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The start date of the work experience (optional).
+ *               endDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The end date of the work experience (optional).
+ *               skills:
+ *                 type: string
+ *                 description: Skills acquired during the work experience (optional).
+ *     responses:
+ *       '201':
+ *         description: Work experience details updated successfully.
+ *       '400':
+ *         description: Bad request. The request body does not conform to the expected schema.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *       '404':
+ *         description: Not found. Applicant or work experience not found.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ * /applicants/get-work-experience:
+ *   get:
+ *     summary: Get work experiences for an applicant.
+ *     description: Retrieve work experiences for the authenticated applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: Work experiences retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 workExperiences:
+ *                   type: array
+ *                   description: List of work experiences.
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                         description: The ID of the work experience record.
+ *                       position:
+ *                         type: string
+ *                         description: The position held in the work experience.
+ *                       employmentType:
+ *                         type: string
+ *                         description: The type of employment for the work experience.
+ *                       companyName:
+ *                         type: string
+ *                         description: The name of the company for the work experience.
+ *                       location:
+ *                         type: string
+ *                         description: The location of the work experience.
+ *                       workModality:
+ *                         type: string
+ *                         description: The work modality for the work experience.
+ *                       industry:
+ *                         type: string
+ *                         description: The industry of the work experience.
+ *                       description:
+ *                         type: string
+ *                         description: Description of the work experience.
+ *                       startDate:
+ *                         type: string
+ *                         format: date
+ *                         description: The start date of the work experience.
+ *                       endDate:
+ *                         type: string
+ *                         format: date
+ *                         description: The end date of the work experience.
+ *                       skills:
+ *                         type: string
+ *                         description: Skills acquired during the work experience.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '404':
+ *         description: Not found. Applicant not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ * /applicants/get-work-experience/{workExperienceId}:
+ *   get:
+ *     summary: Get a specific work experience for an applicant.
+ *     description: Retrieve a specific work experience record by ID for the authenticated applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: workExperienceId
+ *         required: true
+ *         description: ID of the work experience record to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Work experience retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 existingWorkExperience:
+ *                   type: object
+ *                   description: Details of the work experience.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '404':
+ *         description: Not found. Work experience record not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ * /applicants/delete-work-experience/{workExperienceId}:
+ *   delete:
+ *     summary: Delete a work experience record for an applicant.
+ *     description: Delete a work experience record by ID for an applicant.
+ *     tags:
+ *       - Applicants
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: workExperienceId
+ *         required: true
+ *         description: ID of the work experience record to delete.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '201':
+ *         description: Work experience record deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message.
+ *       '400':
+ *         description: Bad request. The provided ID is not valid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '401':
+ *         description: Unauthorized. User is not authenticated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '404':
+ *         description: Not found. Work experience record not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
+ *       '500':
+ *         description: Internal server error. An unexpected error occurred.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message indicating the cause of the failure.
  */
 
 import { Router } from 'express'
@@ -482,6 +816,32 @@ router.delete(
   '/delete-education/:educationId',
   [authMiddleware],
   ApplicantController.deleteEducation
+)
+
+router.post(
+  '/add-work-experience',
+  [authMiddleware],
+  ApplicantController.addWorkExperience
+)
+router.put(
+  '/add-work-experience/:workExperienceId',
+  [authMiddleware],
+  ApplicantController.updateWorkExperience
+)
+router.get(
+  '/get-work-experience',
+  [authMiddleware],
+  ApplicantController.getWorkExperiences
+)
+router.get(
+  '/get-work-experience/:workExperienceId',
+  [authMiddleware],
+  ApplicantController.getWorkExperience
+)
+router.delete(
+  '/delete-work-experience/:workExperienceId',
+  [authMiddleware],
+  ApplicantController.deleteWorkExperience
 )
 
 export default router

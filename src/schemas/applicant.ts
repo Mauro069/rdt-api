@@ -61,3 +61,32 @@ export function validateApplicantEducation(input: any) {
 export function validateApplicantEducationUpdate(input: any) {
   return applicantEducationSchema.partial().safeParse(input)
 }
+
+const applicantWorkExperienceSchema = z.object({
+  position: z.string({
+    required_error: 'Position is required.',
+  }),
+  employmentType: z.string({
+    required_error: 'Employment type is required.',
+  }),
+  companyName: z.string({
+    required_error: 'Company name is required.',
+  }),
+  location: z.string().optional(),
+  workModality: z.string({
+    required_error: 'Work modality is required.',
+  }),
+  industry: z.string().optional(),
+  description: z.string().max(2000).optional(),
+  startDate: z.coerce.date().optional(),
+  endDate: z.coerce.date().optional(),
+  skills: z.string().optional(),
+})
+
+export function validateApplicantWorkExperience(input: any) {
+  return applicantWorkExperienceSchema.safeParse(input)
+}
+
+export function validateApplicantWorkExperienceUpdate(input: any) {
+  return applicantWorkExperienceSchema.partial().safeParse(input)
+}
