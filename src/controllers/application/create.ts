@@ -49,9 +49,8 @@ export async function create(req: Request, res: Response): Promise<void> {
       return
     }
 
-    console.log('job', existingJob)
-    //@ts-ignore
     const existingCompany = await CompanyModel.findOne({
+      //@ts-ignore
       _id: existingJob.company.id,
     }).populate('user')
 
@@ -91,10 +90,11 @@ export async function create(req: Request, res: Response): Promise<void> {
       existingApplicant.lastName,
       existingJob.title
     )
-    //@ts-ignore
+
     mailService.send(
       messages.mail.newApplicationSubjet,
       template,
+      //@ts-ignore
       existingCompany.user.email
     )
 

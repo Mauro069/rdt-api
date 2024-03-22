@@ -50,8 +50,8 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
-    //@ts-ignore
     const existingApplicantUser = await UserModel.findOne({
+      //@ts-ignore
       _id: existingApplication.applicant.user,
     })
 
@@ -65,9 +65,9 @@ export async function update(req: Request, res: Response): Promise<void> {
 
     await existingApplication.save()
 
-    //@ts-ignore
     const template = mailService.getUpdateApplicationTemplate(
       existingCompany.businessName,
+      //@ts-ignore
       existingApplication.job.title
     )
     mailService.send(
