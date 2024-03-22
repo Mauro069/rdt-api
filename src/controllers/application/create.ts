@@ -9,6 +9,8 @@ import { ApplicationModel, IApplication } from '../../models/application.model'
 import { jobStatus } from '../../utils/constants'
 import { WorkExperienceModel } from '../../models/workExperience.model'
 import { EducationModel } from '../../models/education.model'
+import mailService from '../../lib/nodemailer'
+import { CompanyModel } from '../../models/company.model'
 
 export async function create(req: Request, res: Response): Promise<void> {
   try {
@@ -36,7 +38,7 @@ export async function create(req: Request, res: Response): Promise<void> {
 
     const { job } = result.data
 
-    const existingJob = await JobModel.findOne({ _id: job })
+    const existingJob = await JobModel.findOne({ _id: job }).populate('company')
     if (!existingJob) {
       res.status(404).json({ message: messages.error.jobNotFound })
       return
@@ -47,10 +49,22 @@ export async function create(req: Request, res: Response): Promise<void> {
       return
     }
 
+    console.log('job', existingJob)
+    //@ts-ignore
+    const existingCompany = await CompanyModel.findOne({
+      _id: existingJob.company.id,
+    }).populate('user')
+
+    if (!existingCompany) {
+      res.status(404).json({ message: messages.error.companyNotFound })
+      return
+    }
+
     const existingApplication = await ApplicationModel.findOne({
       job: job,
       applicant: existingApplicant._id,
     })
+
     if (existingApplication) {
       res.status(404).json({ message: messages.error.jobAlreadyApplicated })
       return
@@ -71,6 +85,18 @@ export async function create(req: Request, res: Response): Promise<void> {
     })
 
     await newApplication.save()
+
+    const template = mailService.getApplicationTemplate(
+      existingApplicant.name,
+      existingApplicant.lastName,
+      existingJob.title
+    )
+    //@ts-ignore
+    mailService.send(
+      messages.mail.newApplicationSubjet,
+      template,
+      existingCompany.user.email
+    )
 
     res.status(201).json({ message: messages.success.applicationCreated })
   } catch (error) {

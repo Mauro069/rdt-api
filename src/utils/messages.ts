@@ -1,6 +1,8 @@
 export const messages = {
   mail: {
     registerSubject: 'Registro RDT - Confirmá tu correo',
+    newApplicationSubjet: 'RDT - Nueva postulación',
+    updateApplicationSubjet: 'RDT - Actualización postulación',
   },
   success: {
     registration: 'Usuario registrado con éxito',

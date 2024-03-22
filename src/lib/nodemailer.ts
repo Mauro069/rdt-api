@@ -40,7 +40,7 @@ const send = (subject: string, html: string, to: string): void => {
     })
 }
 
-const getTemplate = (name: string, urlConfirm: string) => {
+const getConfirmTemplate = (name: string, urlConfirm: string) => {
   return `
       <head>
           <link rel="stylesheet" href="./style.css">
@@ -58,9 +58,44 @@ const getTemplate = (name: string, urlConfirm: string) => {
     `
 }
 
+const getApplicationTemplate = (
+  name: string,
+  lastName: string,
+  title: string
+) => {
+  const fullName = `${lastName}, ${name}`
+  return `
+      <head>
+          <link rel="stylesheet" href="./style.css">
+      </head>
+      
+      <div id="email___content">
+          <img src="cid:logo" alt="logo">
+          <h2>Nueva postulación</h2>
+          <p>El usuario ${fullName} se postuló al aviso ${title}</p>
+      </div>
+    `
+}
+
+const getUpdateApplicationTemplate = (businessName: string, title: string) => {
+  return `
+      <head>
+          <link rel="stylesheet" href="./style.css">
+      </head>
+      
+      <div id="email___content">
+          <img src="cid:logo" alt="logo">
+          <h2>Actualización</h2>
+          <p>La empresa ${businessName} actualizó el stado de tu postulación al aviso ${title}</p>
+      </div>
+    `
+}
+
 const mailService = {
   send,
-  getTemplate,
+  getConfirmTemplate,
+  getApplicationTemplate,
+  getUpdateApplicationTemplate,
 }
 
 export default mailService

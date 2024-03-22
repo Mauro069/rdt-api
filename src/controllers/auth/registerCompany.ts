@@ -47,7 +47,7 @@ export async function registerCompany(
     const token = getToken({ username: username, code: newUser.code })
 
     const urlConfirm = `${env.APP_API_URL}/auth/confirm/${token}`
-    const template = mailService.getTemplate(username, urlConfirm)
+    const template = mailService.getConfirmTemplate(username, urlConfirm)
     mailService.send(messages.mail.registerSubject, template, email)
 
     await newUser.save()

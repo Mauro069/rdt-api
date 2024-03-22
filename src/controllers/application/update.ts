@@ -5,6 +5,8 @@ import { getUserId } from '../../utils/getUserId'
 import { validateUpdateApplication } from '../../schemas/application'
 import { ApplicationModel } from '../../models/application.model'
 import { CompanyModel } from '../../models/company.model'
+import mailService from '../../lib/nodemailer'
+import { UserModel } from '../../models/user.model'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {
@@ -29,7 +31,7 @@ export async function update(req: Request, res: Response): Promise<void> {
 
     let existingApplication = await ApplicationModel.findOne({
       _id: applicationId,
-    }).populate('job')
+    }).populate(['job', 'applicant'])
 
     if (!existingApplication) {
       res.status(404).json({ message: messages.error.applicationNotFound })
@@ -48,10 +50,31 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
+    //@ts-ignore
+    const existingApplicantUser = await UserModel.findOne({
+      _id: existingApplication.applicant.user,
+    })
+
+    if (!existingApplicantUser) {
+      res.status(404).json({ message: messages.error.applicantNotFound })
+      return
+    }
+
     // Actualizo el documento existente con los nuevos valores
     Object.assign(existingApplication, result.data)
 
     await existingApplication.save()
+
+    //@ts-ignore
+    const template = mailService.getUpdateApplicationTemplate(
+      existingCompany.businessName,
+      existingApplication.job.title
+    )
+    mailService.send(
+      messages.mail.updateApplicationSubjet,
+      template,
+      existingApplicantUser.email
+    )
 
     res.status(201).json({ message: messages.success.applicationUpdated })
   } catch (error) {
