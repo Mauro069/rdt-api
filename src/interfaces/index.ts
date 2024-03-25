@@ -20,3 +20,10 @@ export interface IFilter extends Document {
 export interface MessageResponse {
   message: string
 }
+
+export interface Schedule {
+  [key: string]: {
+    frecuency: string
+    handler: string
+  }
+}

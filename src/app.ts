@@ -13,6 +13,7 @@ import workModalityRoutes from './routes/workModality.routes'
 import maritalStatusRoutes from './routes/maritalStatus.routes'
 import { connectToDatabase } from './lib/mongodb'
 import { setupSwaggerDocs } from './lib/swagger'
+import { scheduler } from './lib/scheduler'
 import { env } from './config'
 import { MessageResponse } from './interfaces'
 import { corsMiddleware } from './middlewares/cors'
@@ -47,6 +48,8 @@ app.use('/work-modality', workModalityRoutes)
 app.use('/marital-status', maritalStatusRoutes)
 
 setupSwaggerDocs(app)
+
+if (env.APP_RUN_SCHEDULE === 'true') scheduler.initCrons()
 
 app.listen(port, () => {
   connectToDatabase()
