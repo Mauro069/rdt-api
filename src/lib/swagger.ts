@@ -30,6 +30,9 @@ const options = {
       {
         url: 'http://localhost:8000',
       },
+      {
+        url: 'https://rdt-api-sn8h.onrender.com',
+      }
     ],
   },
   apis: ['**/*.ts'],
