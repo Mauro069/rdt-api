@@ -17,15 +17,13 @@ import { env } from './config'
 import { MessageResponse } from './interfaces'
 import { corsMiddleware } from './middlewares/cors'
 import morgan from 'morgan'
-import cors from 'cors'
 
 const app = express()
-const port = env.PORT || 8000
+const port = env.PORT
 
 app.use(express.json())
 app.use(morgan('dev'))
-//app.use(corsMiddleware())
-app.use(cors())
+app.use(corsMiddleware())
 app.disable('x-powered-by')
 
 app.get<{}, MessageResponse>('/', (_req, res) => {
