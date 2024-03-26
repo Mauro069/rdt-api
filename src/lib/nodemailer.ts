@@ -91,11 +91,36 @@ const getUpdateApplicationTemplate = (businessName: string, title: string) => {
     `
 }
 
+const getInactiveJobTemplate = (company: any, jobs: any) => {
+  const subtitle =
+    jobs.length > 1
+      ? `los siguientes avisos pasaron a estar INACTIVOS`
+      : `el siguiente aviso pasó a estar INACTIVO`
+
+  const inactiveJobs = jobs.map((job: any) => {
+    return `<li>${job.title}</li>`
+  })
+
+  return `
+      <head>
+          <link rel="stylesheet" href="./style.css">
+      </head>
+      
+      <div id="email___content">
+          <img src="cid:logo" alt="logo">
+          <h2>Avisos Inactivos</h2>
+          <p>Hola ${company.businessName}, ${subtitle}</p>
+          <ul>${inactiveJobs}</ul>
+      </div>
+    `
+}
+
 const mailService = {
   send,
   getConfirmTemplate,
   getApplicationTemplate,
   getUpdateApplicationTemplate,
+  getInactiveJobTemplate,
 }
 
 export default mailService

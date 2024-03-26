@@ -43,6 +43,7 @@ export async function update(req: Request, res: Response): Promise<void> {
 
     // Actualizo el documento existente con los nuevos valores
     Object.assign(existingJob, result.data)
+    existingJob.updateDate = new Date()
 
     await existingJob.save()
 

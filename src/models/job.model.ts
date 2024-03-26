@@ -9,6 +9,7 @@ export interface IJob extends Document {
   description: string
   duration: Number
   creationDate: Date
+  updateDate: Date
   status: JobStatus
 }
 
@@ -21,6 +22,7 @@ const jobSchema = new Schema({
   description: String,
   duration: Number,
   creationDate: { type: Date, required: true },
+  updateDate: { type: Date, required: true },
   status: {
     type: String,
     enum: ['ACTIVE', 'INACTIVE', 'PAUSED', 'DELETED'],

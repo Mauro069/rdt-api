@@ -34,6 +34,7 @@ export async function create(req: Request, res: Response): Promise<void> {
       ...result.data,
       company: existingCompany._id,
       creationDate: new Date(),
+      updateDate: new Date(),
     })
 
     await newJob.save()

@@ -20,7 +20,9 @@ export const env = {
   APP_CONFIRM_PAGE: process.env.APP_CONFIRM_PAGE ?? '/confirm.html',
   APP_ERROR_CODE_PAGE: process.env.APP_ERROR_CODE_PAGE ?? '/error.html',
   APP_RUN_SCHEDULE: process.env.APP_RUN_SCHEDULE ?? 'false',
-  SCHEDULE_INACTIVE_DURATION: process.env.SCHEDULE_INACTIVE_DURATION ?? '30',
+  SCHEDULE_INACTIVE_DURATION: parseInt(
+    process.env.SCHEDULE_INACTIVE_DURATION ?? '30'
+  ),
 }
 
 export const schedule: Schedule = {

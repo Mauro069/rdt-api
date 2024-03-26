@@ -3,6 +3,7 @@ export const messages = {
     registerSubject: 'Registro RDT - Confirmá tu correo',
     newApplicationSubjet: 'RDT - Nueva postulación',
     updateApplicationSubjet: 'RDT - Actualización postulación',
+    inactiveJobSubjet: 'RDT - Avisos inactivos',
   },
   success: {
     registration: 'Usuario registrado con éxito',
