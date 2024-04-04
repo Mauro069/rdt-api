@@ -3,6 +3,7 @@ import { get } from './get'
 import { getAll } from './getAll'
 import { update } from './update'
 import { getApplicants } from './getApplicants'
+import { getById } from './getById'
 
 export const JobController = {
   create,
@@ -10,4 +11,5 @@ export const JobController = {
   getAll,
   update,
   getApplicants,
+  getById,
 }

@@ -394,6 +394,83 @@
  *                   type: string
  *                 error:
  *                   type: object
+ * /jobs/{jobId}:
+ *   get:
+ *     tags:
+ *       - Jobs
+ *     summary: Obtener información de un trabajo por ID
+ *     description: Obtiene información detallada de un trabajo utilizando su ID.
+ *     parameters:
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         description: ID del trabajo del cual obtener solicitantes
+ *         schema:
+ *           type: string
+ *     responses:
+ *         '200':
+ *           description: OK. Devuelve la información del trabajo.
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   job:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       company:
+ *                         type: object
+ *                         properties:
+ *                            image:
+ *                              type: object
+ *                              properties:
+ *                                 secure_url:
+ *                                   type: string
+ *                                 public_id:
+ *                                   type: string
+ *                            user:
+ *                              type: string
+ *                            businessName:
+ *                              type: string
+ *                            description:
+ *                              type: string
+ *                            id:
+ *                              type: string
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       duration:
+ *                         type: number
+ *                       creationDate:
+ *                         type: string
+ *                         format: date-time
+ *                       updateDate:
+ *                         type: string
+ *                         format: date-time
+ *                       status:
+ *                         type: string
+ *                         enum: ['ACTIVE', 'INACTIVE', 'PAUSED', 'DELETED']
+ *         '400':
+ *           description: Bad Request. El ID no fue proporcionado o no es válido.
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
+ *         '500':
+ *           description: Error del servidor. Se produjo un error al procesar la solicitud.
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   message:
+ *                     type: string
  */
 
 import { Router } from 'express'
@@ -407,5 +484,5 @@ router.get('/', [authMiddleware], JobController.get)
 router.get('/all', JobController.getAll)
 router.post('/update/:jobId', [authMiddleware], JobController.update)
 router.get('/applicants/:jobId', [authMiddleware], JobController.getApplicants)
-
+router.get('/:jobId', JobController.getById)
 export default router
