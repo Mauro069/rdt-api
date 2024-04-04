@@ -23,6 +23,7 @@ export const env = {
   SCHEDULE_INACTIVE_DURATION: parseInt(
     process.env.SCHEDULE_INACTIVE_DURATION ?? '30'
   ),
+  JWT_EXPIRE_TIME: process.env.JWT_EXPIRE_TIME ?? '24h',
 }
 
 export const schedule: Schedule = {

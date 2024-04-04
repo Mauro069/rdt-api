@@ -204,6 +204,29 @@
  *         description: No autorizado debido a credenciales inválidas o error de autenticación.
  *       '500':
  *         description: Error interno del servidor.
+ * /auth/verify-token:
+ *   get:
+ *     tags:
+ *       - Authentication
+ *     summary: Verificar Token JWT es válido
+ *     description: Verifica si el token JWT proporcionado es válido.
+ *     security:
+ *       - customToken: []
+ *     responses:
+ *       '200':
+ *         description: Token válido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 isValid:
+ *                   type: boolean
+ *                   description: Indica si el token es válido o no.
+ *       '401':
+ *         description: No autorizado debido a credenciales inválidas o error de autenticación.
+ *       '500':
+ *         description: Error interno del servidor.
  */
 
 import { Router } from 'express'
@@ -224,5 +247,6 @@ router.post('/register-company', AuthController.registerCompany)
 router.post('/login', AuthController.login)
 router.get('/confirm/:token', AuthController.confirm)
 router.post('/change-password', [authMiddleware], AuthController.changePassword)
+router.get('/verify-token', AuthController.verifyToken)
 
 export default router

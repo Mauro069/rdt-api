@@ -4,6 +4,7 @@ import { registerApplicant } from './registerApplicant'
 import { registerCompany } from './registerCompany'
 import { confirm } from './confirm'
 import { changePassword } from './changePassword'
+import { verifyToken } from './verifyToken'
 
 export const AuthController = {
   register,
@@ -12,4 +13,5 @@ export const AuthController = {
   login,
   confirm,
   changePassword,
+  verifyToken,
 }
