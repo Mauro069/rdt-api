@@ -59,8 +59,12 @@ export async function registerApplicant(
     })
 
     await newApplicant.save()
-    res.status(201).json({ message: messages.success.registration })
+    res
+      .status(201)
+      .json({ success: true, message: messages.success.registration })
   } catch (error) {
-    res.status(500).json({ message: messages.error.generic, error })
+    res
+      .status(500)
+      .json({ success: false, message: messages.error.generic, error })
   }
 }

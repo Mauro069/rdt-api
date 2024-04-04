@@ -34,7 +34,18 @@
  *       - customToken: []
  *     responses:
  *       '201':
- *         description: Usuario administrador registrado exitosamente.
+ *         description: Admin registrad exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indica si el registro fue exitoso.
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de éxito.
  *       '400':
  *         description: Error de validación en los datos del usuario.
  *       '500':
@@ -70,7 +81,18 @@
  *               - lastName
  *     responses:
  *       '201':
- *         description: Solicitante registrado exitosamente.
+ *         description: Postulante registrado exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indica si el registro fue exitoso.
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de éxito.
  *       '400':
  *         description: Error de validación en los datos del solicitante.
  *       '500':
@@ -107,6 +129,17 @@
  *     responses:
  *       '201':
  *         description: Empresa registrada exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indica si el registro fue exitoso.
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de éxito.
  *       '400':
  *         description: Error de validación en los datos de la empresa.
  *       '500':
