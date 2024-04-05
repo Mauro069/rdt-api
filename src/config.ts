@@ -3,7 +3,7 @@ import { Schedule } from './interfaces'
 dotenv.config()
 
 export const env = {
-  PORT: parseInt(process.env.PORT ?? '8000', 10),
+  PORT: parseInt(process.env.PORT ?? '3000', 10),
   MONGODB_URI: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1/rdt',
   SECRET: process.env.SECRET ?? 'RDT-SECRET-KEY',
   ADMIN_USERNAME: process.env.ADMIN_USERNAME ?? 'admin',
@@ -16,7 +16,7 @@ export const env = {
   APP_EMAIL_ACCOUNT:
     process.env.APP_EMAIL_ACCOUNT ?? 'pruebas.desarrollo.all@gmail.com',
   APP_EMAIL_PASSWORD: process.env.APP_EMAIL_PASSWORD ?? 'ymkc hbdb cnex hvvq',
-  APP_API_URL: process.env.APP_API_URL ?? 'http://localhost:8000',
+  APP_API_URL: process.env.APP_API_URL ?? 'http://localhost:3000',
   APP_CONFIRM_PAGE: process.env.APP_CONFIRM_PAGE ?? '/confirm.html',
   APP_ERROR_CODE_PAGE: process.env.APP_ERROR_CODE_PAGE ?? '/error.html',
   APP_RUN_SCHEDULE: process.env.APP_RUN_SCHEDULE ?? 'false',
