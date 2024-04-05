@@ -10,6 +10,18 @@ export interface IApplicant extends Document {
   }
   name: string
   lastName: string
+  phoneNumber: string
+  address: string
+  postalCode: string
+  province: Schema.Types.ObjectId
+  cityRegion: string
+  gender: Schema.Types.ObjectId
+  birthDate: Date
+  birthPlace: string
+  nationality: string
+  maritalStatus: Schema.Types.ObjectId
+  linkedIn: string
+  webSite: string
 }
 
 const applicantSchema = new Schema({
@@ -23,6 +35,27 @@ const applicantSchema = new Schema({
   },
   name: String,
   lastName: String,
+  phoneNumber: String,
+  address: String,
+  postalCode: String,
+  province: {
+    type: Schema.Types.ObjectId,
+    ref: 'Province',
+  },
+  cityRegion: String,
+  gender: {
+    type: Schema.Types.ObjectId,
+    ref: 'Gender',
+  },
+  birthDate: Date,
+  birthPlace: String,
+  nationality: String,
+  maritalStatus: {
+    type: Schema.Types.ObjectId,
+    ref: 'MaritalStatus',
+  },
+  linkedIn: String,
+  webSite: String,
 })
 
 applicantSchema.plugin(mongoosePaginate)

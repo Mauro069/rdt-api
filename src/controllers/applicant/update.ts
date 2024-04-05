@@ -8,6 +8,9 @@ import { validateApplicant } from '../../schemas/applicant'
 import { UploadImageResult, uploadImage } from '../../utils/uploadImage'
 import { UploadedFile } from 'express-fileupload'
 import { deleteFile } from '../../lib/cloudinary'
+import { ProvinceModel } from '../../models/province.model'
+import { GenderModel } from '../../models/gender.model'
+import { MaritalStatusModel } from '../../models/maritalStatus.model'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {
@@ -55,6 +58,35 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
+    if (result.data.province) {
+      const province = ProvinceModel.findOne({ _id: result.data.province })
+      if (!province) {
+        res.status(404).json({ message: messages.error.provinceNotFound })
+        return
+      }
+    }
+
+    if (result.data.gender) {
+      const gender = GenderModel.findOne({ _id: result.data.gender })
+      if (!gender) {
+        res.status(404).json({ message: messages.error.genderNotFound })
+        return
+      }
+    }
+
+    if (result.data.maritalStatus) {
+      const maritalStatus = MaritalStatusModel.findOne({
+        _id: result.data.maritalStatus,
+      })
+      if (!maritalStatus) {
+        res.status(404).json({ message: messages.error.maritalStatusNotFound })
+        return
+      }
+    }
+
+    // Actualizo el documento existente con los nuevos valores
+    Object.assign(existingApplicant, result.data)
+
     if (req.files?.image) {
       const file: UploadedFile | UploadedFile[] | undefined = req.files?.image
       const image = file instanceof Array ? file[0] : file
@@ -63,20 +95,11 @@ export async function update(req: Request, res: Response): Promise<void> {
         res.status(401).json({ message: uploadResult.message })
         return
       }
-      if (existingApplicant.image) {
+      if (existingApplicant.image?.public_id) {
         await deleteFile(existingApplicant.image.public_id)
       }
 
       if (uploadResult.image) existingApplicant.image = uploadResult.image
-    }
-
-    if (result.data.hasOwnProperty('name')) {
-      if (result.data.name) existingApplicant.name = result.data.name
-    }
-
-    if (result.data.hasOwnProperty('lastName')) {
-      if (result.data.lastName)
-        existingApplicant.lastName = result.data.lastName
     }
 
     await existingApplicant.save()

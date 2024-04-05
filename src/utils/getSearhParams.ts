@@ -24,7 +24,8 @@ export function getSearhParams(req: Request, paths: any): SearchParams {
   const searchParam: any = {}
   fields.forEach((param) => {
     if (!allowedParams.includes(param) && queryParams[param] !== undefined) {
-      searchParam[param] = queryParams[param]
+      //@ts-ignore
+      searchParam[param] = { $regex: new RegExp(queryParams[param], 'i') }
     }
   })
 

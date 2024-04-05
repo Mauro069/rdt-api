@@ -3,6 +3,7 @@ import { IUser, UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
 import { userStatus } from '../../utils/constants'
 import { getTokenData } from '../../utils/jwt'
+import { env } from '../../config'
 
 export async function confirm(req: Request, res: Response): Promise<void> {
   try {
@@ -27,7 +28,7 @@ export async function confirm(req: Request, res: Response): Promise<void> {
 
     // Verificar el código
     if (code !== user.code) {
-      return res.redirect('/error.html')
+      return res.redirect(env.APP_ERROR_CODE_PAGE)
     }
 
     // // Actualizar usuario
@@ -35,7 +36,7 @@ export async function confirm(req: Request, res: Response): Promise<void> {
     await user.save()
 
     // // Redireccionar a la confirmación
-    return res.redirect('/confirm.html')
+    return res.redirect(env.APP_CONFIRM_PAGE)
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: messages.error.generic, error })

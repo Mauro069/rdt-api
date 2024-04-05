@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
-import { env } from 'process'
+import { env } from '../config'
 
 export function getToken(payload: any) {
   return jwt.sign(payload, env.SECRET!, {
-    expiresIn: '1h',
+    expiresIn: env.JWT_EXPIRE_TIME,
   })
 }
 
@@ -22,4 +22,14 @@ export function getTokenData(token: string): any {
   )
 
   return data
+}
+
+export function isValidToken(token: string): any {
+  let isValid = false
+  jwt.verify(token, env.SECRET!, (err, decoded) => {
+    if (!err) {
+      isValid = true
+    }
+  })
+  return isValid
 }
