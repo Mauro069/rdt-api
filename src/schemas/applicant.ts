@@ -1,7 +1,5 @@
 import z from 'zod'
-
-const MAX_FILE_SIZE = 5 * 1024 * 1024 // 1MB
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from '../config'
 
 const applicantSchema = z.object({
   name: z.string({
@@ -27,13 +25,13 @@ const applicantSchema = z.object({
   phoneNumber: z.string(),
   address: z.string(),
   postalCode: z.string(),
-  province: z.string(), // O puedes usar z.string() si no tienes definido el esquema de ObjectId
+  province: z.string(),
   cityRegion: z.string(),
-  gender: z.string(), // O puedes usar z.string() si no tienes definido el esquema de ObjectId
+  gender: z.string(),
   birthDate: z.coerce.date(),
   birthPlace: z.string(),
   nationality: z.string(),
-  maritalStatus: z.string(), // O puedes usar z.string() si no tienes definido el esquema de ObjectId
+  maritalStatus: z.string(),
   linkedIn: z.string(),
   webSite: z.string(),
 })

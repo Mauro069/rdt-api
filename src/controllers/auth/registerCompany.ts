@@ -1,5 +1,8 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
+import { UploadedFile } from 'express-fileupload'
+import fs from 'fs-extra'
+import { v4 as uuidv4 } from 'uuid'
 
 import { IUser, UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
@@ -7,9 +10,10 @@ import { validateCompanyUser } from '../../schemas/auth'
 import { env } from '../../config'
 import mailService from '../../lib/nodemailer'
 import { getToken } from '../../utils/jwt'
-import { v4 as uuidv4 } from 'uuid'
 import { userType } from '../../utils/constants'
 import { CompanyModel, ICompany } from '../../models/company.model'
+import { validateCompany } from '../../schemas/company'
+import { UploadImageResult, uploadImage } from '../../utils/uploadImage'
 
 export async function registerCompany(
   req: Request,
@@ -22,6 +26,28 @@ export async function registerCompany(
       //@ts-ignore
       res.status(400).json({ error: JSON.parse(result.error.message) })
       return
+    }
+
+    if (req.files?.image) {
+      const resultImage = validateCompany(req.files)
+
+      if (!resultImage.success) {
+        if (req.files?.image) {
+          const files: UploadedFile | UploadedFile[] | undefined =
+            req.files?.image
+          if (Array.isArray(files)) {
+            for (const file of files) {
+              await fs.unlink(file.tempFilePath)
+            }
+          } else if (files) {
+            await fs.unlink(files.tempFilePath)
+          }
+        }
+
+        //@ts-ignore
+        res.status(400).json({ error: JSON.parse(resultImage.error.message) })
+        return
+      }
     }
 
     const { username, email, password, businessName, description } = result.data
@@ -59,6 +85,18 @@ export async function registerCompany(
       businessName: businessName,
       description: description,
     })
+
+    if (req.files?.image) {
+      const file: UploadedFile | UploadedFile[] | undefined = req.files?.image
+      const image = file instanceof Array ? file[0] : file
+      let uploadResult: UploadImageResult = await uploadImage(image)
+      if (uploadResult.error) {
+        res.status(401).json({ message: uploadResult.message })
+        return
+      }
+
+      if (uploadResult.image) newCompany.image = uploadResult.image
+    }
 
     await newCompany.save()
     res

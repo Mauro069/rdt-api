@@ -59,7 +59,7 @@
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -73,6 +73,10 @@
  *                 type: string
  *               lastName:
  *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: The image file of the applicant.
  *             required:
  *               - username
  *               - email
@@ -106,7 +110,7 @@
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -120,6 +124,10 @@
  *                 type: string
  *               description:
  *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: The image file of the applicant.
  *             required:
  *               - username
  *               - email
@@ -267,6 +275,7 @@ import { AuthController } from '../controllers/auth/index'
 import { authMiddleware } from '../middlewares/auth'
 import { userTypeMiddleware } from '../middlewares/userType'
 import { userType } from '../utils/constants'
+import { uploadMiddleware } from '../middlewares/upload'
 
 const router = Router()
 
@@ -275,8 +284,16 @@ router.post(
   [authMiddleware, userTypeMiddleware(userType.ADMIN)],
   AuthController.register
 )
-router.post('/register-applicant', AuthController.registerApplicant)
-router.post('/register-company', AuthController.registerCompany)
+router.post(
+  '/register-applicant',
+  [uploadMiddleware],
+  AuthController.registerApplicant
+)
+router.post(
+  '/register-company',
+  [uploadMiddleware],
+  AuthController.registerCompany
+)
 router.post('/login', AuthController.login)
 router.get('/confirm/:token', AuthController.confirm)
 router.post('/change-password', [authMiddleware], AuthController.changePassword)

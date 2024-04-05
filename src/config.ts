@@ -26,6 +26,9 @@ export const env = {
   JWT_EXPIRE_TIME: process.env.JWT_EXPIRE_TIME ?? '24h',
 }
 
+export const MAX_FILE_SIZE = 5 * 1024 * 1024 // 1MB
+export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+
 export const schedule: Schedule = {
   cleaner: {
     frecuency: process.env.SCHEDULE_INACTIVE_JOBS ?? '*/15 * * * * *',
