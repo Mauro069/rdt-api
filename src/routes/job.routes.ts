@@ -210,10 +210,14 @@
  *           type: string
  *         description: Field to sort by. Prefix with '-' for descending order.
  *       - in: query
- *         name: searchParam
+ *         name: params
  *         schema:
+ *           type: object
+ *         description: Por ejemplo {"title":"program"}
+ *         additionalProperties:
  *           type: string
- *         description: Search parameter to filter jobs (e.g., title, description).
+ *         style: form
+ *         explode: true
  *     responses:
  *       '200':
  *         description: A list of jobs.

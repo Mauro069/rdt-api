@@ -173,10 +173,14 @@
  *           type: string
  *         description: Campo por el cual ordenar. Prefijo '-' para orden descendente.
  *       - in: query
- *         name: searchParam
+ *         name: params
  *         schema:
+ *           type: object
+ *         description: Por ejemplo {"title":"program"}
+ *         additionalProperties:
  *           type: string
- *         description: Parámetro de búsqueda para filtrar aplicaciones (por ejemplo, título, descripción).
+ *         style: form
+ *         explode: true
  *     security:
  *       - customToken: []
  *     responses:
