@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: backend
+    image: pablojpedraza/rdt-api:latest
+    ports:
+      - 4000:4000
+    environment:
+      - PORT=4000
+      - MONGODB_URI=mongodb+srv://XXXXX:XXXXXX@cluster0.0zbxt.mongodb.net/rdt
+      - APP_EMAIL_ACCOUNT=XXXX@XXX.com
+      - APP_EMAIL_PASSWORD=XXXXX XXXXX XXXXX XXXXX
+      - SECRET=XXXXXXXXXX
+      - ADMIN_USERNAME=XXXXX
+      - ADMIN_EMAIL=XXXXX@XXXXX.com
+      - ADMIN_PASSWORD=XXXXX
+      - CLOUDINARY_CLOUD_NAME=XXXXX
+      - CLOUDINARY_API_SECRET=XXXXX
+      - CLOUDINARY_API_KEY=XXXXX
+      - CLOUDINARY_FOLDER=XXXXX
+      - APP_API_URL=http://localhost:4000
+      - APP_CONFIRM_PAGE=http://www.google.com.ar
+      - APP_ERROR_CODE_PAGE=http://www.apple.com
+      - APP_RUN_SCHEDULE=false
+      - SCHEDULE_INACTIVE_JOBS=*/15 * * * * *
+      - SCHEDULE_INACTIVE_DURATION=5
+      - JWT_EXPIRE_TIME=24h
