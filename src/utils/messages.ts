@@ -4,6 +4,7 @@ export const messages = {
     newApplicationSubjet: 'RDT - Nueva postulación',
     updateApplicationSubjet: 'RDT - Actualización postulación',
     inactiveJobSubjet: 'RDT - Avisos inactivos',
+    newContactSubjet: 'RDT - Contacto de usuario',
   },
   success: {
     registration: 'Usuario registrado con éxito',
@@ -45,6 +46,7 @@ export const messages = {
     employmentTypeUpdated: 'Tipo de empleo actualizado con éxito',
     employmentTypeDeleted: 'Tipo de empleo eliminado con éxito',
     applicationCreated: 'Postulación creada con éxito',
+    contactSent: 'Contacto enviado',
   },
   error: {
     generic: 'Error en el servidor',

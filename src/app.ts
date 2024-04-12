@@ -11,6 +11,7 @@ import employmentTypeRoutes from './routes/employmentType.routes'
 import competenceRoutes from './routes/competence.routes'
 import workModalityRoutes from './routes/workModality.routes'
 import maritalStatusRoutes from './routes/maritalStatus.routes'
+import contactRoutes from './routes/contact.routes'
 import { connectToDatabase } from './lib/mongodb'
 import { setupSwaggerDocs } from './lib/swagger'
 import { scheduler } from './lib/scheduler'
@@ -46,6 +47,7 @@ app.use('/employment-type', employmentTypeRoutes)
 app.use('/competence', competenceRoutes)
 app.use('/work-modality', workModalityRoutes)
 app.use('/marital-status', maritalStatusRoutes)
+app.use('/contacts', contactRoutes)
 
 setupSwaggerDocs(app)
 

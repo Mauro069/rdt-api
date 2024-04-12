@@ -115,12 +115,32 @@ const getInactiveJobTemplate = (company: any, jobs: any) => {
     `
 }
 
+const geContactTemplate = (
+  name: string,
+  lastName: string,
+  email: string,
+  message: string
+) => {
+  return `
+      <head>
+          <link rel="stylesheet" href="./style.css">
+      </head>
+      
+      <div id="email___content">
+          <h2>Contacto de ${lastName}, ${name}</h2>
+          <p>Correo: ${email}</p>
+          <p>Mensaje: ${message}</p>
+      </div>
+    `
+}
+
 const mailService = {
   send,
   getConfirmTemplate,
   getApplicationTemplate,
   getUpdateApplicationTemplate,
   getInactiveJobTemplate,
+  geContactTemplate,
 }
 
 export default mailService
