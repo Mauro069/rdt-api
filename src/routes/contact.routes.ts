@@ -72,9 +72,6 @@ import { ContactController } from '../controllers/contact'
 
 const router = Router()
 
-router.post(
-  '/send',
-  ContactController.send
-)
+router.post('/send', ContactController.send)
 
 export default router

@@ -115,7 +115,12 @@ const getInactiveJobTemplate = (company: any, jobs: any) => {
     `
 }
 
-const geContactTemplate = (name: string, lastName: string, email: string, message: string) => {
+const geContactTemplate = (
+  name: string,
+  lastName: string,
+  email: string,
+  message: string
+) => {
   return `
       <head>
           <link rel="stylesheet" href="./style.css">
@@ -135,7 +140,7 @@ const mailService = {
   getApplicationTemplate,
   getUpdateApplicationTemplate,
   getInactiveJobTemplate,
-  geContactTemplate
+  geContactTemplate,
 }
 
 export default mailService

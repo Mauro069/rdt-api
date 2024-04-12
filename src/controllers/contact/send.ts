@@ -15,7 +15,7 @@ export async function send(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const {name, lastName, email, message} = result.data
+    const { name, lastName, email, message } = result.data
 
     const template = mailService.geContactTemplate(
       name,
