@@ -50,7 +50,7 @@ export const messages = {
   },
   error: {
     generic: 'Error en el servidor',
-    unverifiedUser: 'Usuario no verificado',
+    unverifiedUser: 'Usuario no verificado (falta confirmar el correo)',
     passwordCoincidence: 'Las contraseñas no coinciden',
     passwordNotValid: 'La constraseña nueva no puede ser igual a la anterior',
     invalidCredentials: 'Credenciales inválidas',
@@ -64,6 +64,7 @@ export const messages = {
     employmentTypeNotFound: 'Tipo de empleo no encontrado',
     workExperienceNotFound: 'Experiencia laboral no encontrada',
     languageNotFound: 'Idioma no encontrado',
+    languageAlreadyExist: 'Este idioma ya existe para este solicitante.',
     competenceNotFound: 'Competencia no encontrada',
     workModalityNotFound: 'Modalidad laboral no encontrada',
     maritalStatusNotFound: 'Estado civil no encontrado',

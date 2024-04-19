@@ -41,8 +41,8 @@ docker build .
 
 ```
 docker login
-docker image tag rdtapi pablojpedraza/rdt-api
-docker push pablojpedraza/rdt-api
+docker image tag rdtapi pablojpedraza/rdt-api:version
+docker push pablojpedraza/rdt-api:version
 ```
 
 Para checkear que se subio consultar en https://hub.docker.com/repository/docker/pablojpedraza/rdt-api/general

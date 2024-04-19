@@ -31,6 +31,16 @@ export async function addLanguage(req: Request, res: Response): Promise<void> {
       return
     }
 
+    const existingLanguage = await LanguageModel.findOne({
+      applicant: existingApplicant._id,
+      language: result.data.language,
+    })
+
+    if (existingLanguage) {
+      res.status(400).json({ message: messages.error.languageAlreadyExist })
+      return
+    }
+
     if (result.data.competence) {
       const competence = CompetenceModel.findOne({
         _id: result.data.competence,
