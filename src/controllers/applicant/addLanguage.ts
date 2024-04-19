@@ -31,15 +31,14 @@ export async function addLanguage(req: Request, res: Response): Promise<void> {
       return
     }
 
-     // Validar si ya existe un idioma con el mismo nombre para el mismo solicitante
-     const existingLanguage = await LanguageModel.findOne({
+    const existingLanguage = await LanguageModel.findOne({
       applicant: existingApplicant._id,
       language: result.data.language,
-    });
+    })
 
     if (existingLanguage) {
-      res.status(400).json({ message: messages.error.languageAlreadyExist });
-      return;
+      res.status(400).json({ message: messages.error.languageAlreadyExist })
+      return
     }
 
     if (result.data.competence) {
