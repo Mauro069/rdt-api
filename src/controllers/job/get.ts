@@ -27,7 +27,7 @@ export async function get(req: Request, res: Response): Promise<void> {
 
     //@ts-ignore
     options.sort = getOrderBy(req, JobModel.schema.obj)
-    
+
     // @ts-ignore
     const jobs = await JobModel.paginate(
       {
