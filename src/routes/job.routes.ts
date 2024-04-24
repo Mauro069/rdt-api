@@ -56,6 +56,17 @@
  *     description: Retrieve all jobs associated with the authenticated company user.
  *     security:
  *       - customToken: []
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of items to return per page
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number to retrieve
  *     responses:
  *       '200':
  *         description: A list of jobs.
@@ -208,7 +219,7 @@
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: Field to sort by. Prefix with '-' for descending order.
+ *         description: Field to sort by. Prefix with ':desc' or ':asc'.
  *       - in: query
  *         name: params
  *         schema:

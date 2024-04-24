@@ -4,9 +4,13 @@ import { messages } from '../../utils/messages'
 import { getUserId } from '../../utils/getUserId'
 import { CompanyModel } from '../../models/company.model'
 import { JobModel } from '../../models/job.model'
+import { getOrderBy } from '../../utils/getOrderBy'
 
 export async function get(req: Request, res: Response): Promise<void> {
   try {
+    //?limit=10&page=10
+    const options = req.query
+
     const { id, error, message } = getUserId(req)
 
     if (error) {
@@ -21,9 +25,19 @@ export async function get(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const jobs = await JobModel.find({
-      company: existingCompany._id,
-    })
+    //@ts-ignore
+    options.sort = getOrderBy(req, JobModel.schema.obj)
+    
+    // @ts-ignore
+    const jobs = await JobModel.paginate(
+      {
+        company: existingCompany._id,
+      },
+      {
+        ...options,
+        populate: 'company',
+      }
+    )
 
     res.status(200).json({ jobs: jobs })
   } catch (error) {
