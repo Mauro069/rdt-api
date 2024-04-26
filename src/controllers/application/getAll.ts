@@ -2,13 +2,12 @@ import { Request, Response } from 'express'
 
 import { messages } from '../../utils/messages'
 import { getSearhParams } from '../../utils/getSearhParams'
-import { getOrderBy } from '../../utils/getOrderBy'
 import { ApplicationModel } from '../../models/application.model'
+import { getOptions } from '../../utils/getOptions'
 
 export async function getAll(req: Request, res: Response): Promise<void> {
   try {
     //?limit=10&page=10
-    const options = req.query
 
     const { searchParam, isValid } = getSearhParams(
       req,
@@ -20,16 +19,18 @@ export async function getAll(req: Request, res: Response): Promise<void> {
       return
     }
 
-    delete options.sortBy
+    const options = getOptions(req, ApplicationModel.schema.obj)
 
-    //@ts-ignore
-    options.sort = getOrderBy(req, ApplicationModel.schema.obj)
-
-    // @ts-ignore
-    const applications = await ApplicationModel.paginate(searchParam, {
+    const sortedOptions = {
       ...options,
       populate: 'job',
-    })
+    }
+
+    // @ts-ignore
+    const applications = await ApplicationModel.paginate(
+      searchParam,
+      sortedOptions
+    )
 
     res.status(200).json({ applications })
   } catch (error) {
