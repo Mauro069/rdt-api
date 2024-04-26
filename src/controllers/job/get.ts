@@ -39,9 +39,10 @@ export async function get(req: Request, res: Response): Promise<void> {
       populate: 'company',
     }
 
-    // @ts-ignore
-    if (typeof req.query.status === 'string')
+    if (typeof req.query.status === 'string') {
+      // @ts-ignore
       searchParam.status = req.query.status
+    }
 
     // @ts-ignore
     const jobs = await JobModel.paginate(
