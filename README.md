@@ -34,7 +34,7 @@ esa instrucción ejecuta el archivo docker-compose.yml y toma de ese archivo las
 ## Generar nueva imagen
 
 ```
-docker build .
+docker build -t rdtapi .
 ```
 
 ## Subir imagen a Docker Hub
