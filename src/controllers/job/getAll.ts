@@ -24,6 +24,10 @@ export async function getAll(req: Request, res: Response): Promise<void> {
     }
 
     // @ts-ignore
+    if (typeof req.query.status === 'string')
+      searchParam.status = req.query.status
+
+    // @ts-ignore
     const jobs = await JobModel.paginate(searchParam, sortedOptions)
 
     res.status(200).json({ jobs })

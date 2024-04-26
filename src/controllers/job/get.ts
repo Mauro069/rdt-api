@@ -5,10 +5,17 @@ import { getUserId } from '../../utils/getUserId'
 import { CompanyModel } from '../../models/company.model'
 import { JobModel } from '../../models/job.model'
 import { getOptions } from '../../utils/getOptions'
+import { getSearhParams } from '../../utils/getSearhParams'
 
 export async function get(req: Request, res: Response): Promise<void> {
   try {
     //?limit=10&page=10
+    const { searchParam, isValid } = getSearhParams(req, JobModel.schema.obj)
+
+    if (!isValid) {
+      res.status(401).json({ message: messages.error.notAllowParams })
+      return
+    }
 
     const { id, error, message } = getUserId(req)
 
@@ -33,8 +40,12 @@ export async function get(req: Request, res: Response): Promise<void> {
     }
 
     // @ts-ignore
+    if (typeof req.query.status === 'string')
+      searchParam.status = req.query.status
+
+    // @ts-ignore
     const jobs = await JobModel.paginate(
-      { company: existingCompany._id },
+      { ...searchParam, company: existingCompany._id },
       sortedOptions
     )
 
