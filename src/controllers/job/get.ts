@@ -25,6 +25,8 @@ export async function get(req: Request, res: Response): Promise<void> {
       return
     }
 
+    delete options.sortBy
+
     //@ts-ignore
     options.sort = getOrderBy(req, JobModel.schema.obj)
 

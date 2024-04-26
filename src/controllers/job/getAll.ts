@@ -17,6 +17,8 @@ export async function getAll(req: Request, res: Response): Promise<void> {
       return
     }
 
+    delete options.sortBy
+
     //@ts-ignore
     options.sort = getOrderBy(req, JobModel.schema.obj)
 
@@ -24,7 +26,6 @@ export async function getAll(req: Request, res: Response): Promise<void> {
     const jobs = await JobModel.paginate(
       {
         ...searchParam,
-        //status: { $ne: jobStatus.DELETED }, // Excluir trabajos con estado DELETED
       },
       {
         ...options,

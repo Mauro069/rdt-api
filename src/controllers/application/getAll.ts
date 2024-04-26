@@ -20,6 +20,8 @@ export async function getAll(req: Request, res: Response): Promise<void> {
       return
     }
 
+    delete options.sortBy
+
     //@ts-ignore
     options.sort = getOrderBy(req, ApplicationModel.schema.obj)
 
