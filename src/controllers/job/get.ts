@@ -6,6 +6,7 @@ import { CompanyModel } from '../../models/company.model'
 import { JobModel } from '../../models/job.model'
 import { getOptions } from '../../utils/getOptions'
 import { getSearhParams } from '../../utils/getSearhParams'
+import { jobStatus } from '../../utils/constants'
 
 export async function get(req: Request, res: Response): Promise<void> {
   try {
@@ -42,6 +43,9 @@ export async function get(req: Request, res: Response): Promise<void> {
     if (typeof req.query.status === 'string') {
       // @ts-ignore
       searchParam.status = req.query.status
+    } else {
+      // @ts-ignore
+      searchParam.status = { $ne: jobStatus.DELETED } // Excluir trabajos con estado DELETED
     }
 
     // @ts-ignore

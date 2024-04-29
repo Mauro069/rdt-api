@@ -13,9 +13,10 @@ export async function get(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const existingCompany = await CompanyModel.findOne({ user: id }).populate(
-      'user'
-    )
+    const existingCompany = await CompanyModel.findOne({ user: id }).populate({
+      path: 'user',
+      select: '-code -password',
+    })
 
     res.status(200).json({ company: existingCompany })
   } catch (error) {

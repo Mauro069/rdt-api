@@ -3,6 +3,7 @@ import { isValidObjectId } from 'mongoose'
 
 import { messages } from '../../utils/messages'
 import { JobModel } from '../../models/job.model'
+import { jobStatus } from '../../utils/constants'
 
 export async function getById(req: Request, res: Response): Promise<void> {
   try {
@@ -20,7 +21,15 @@ export async function getById(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const job = await JobModel.findOne({ _id: jobId }).populate('company')
+    const job = await JobModel.findOne({
+      _id: jobId,
+      status: jobStatus.ACTIVE,
+    }).populate('company')
+
+    if (job === null) {
+      res.status(400).json({ message: messages.error.idNotFound })
+      return
+    }
 
     res.status(200).json({ job })
   } catch (error) {
