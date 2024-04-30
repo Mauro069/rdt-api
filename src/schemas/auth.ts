@@ -79,3 +79,32 @@ const changePasswordSchema = z.object({
 export function validateChangePassword(input: any) {
   return changePasswordSchema.safeParse(input)
 }
+
+const forgotPasswordSchema = z.object({
+  userOrMail: z.string({
+    required_error: 'Username or mail is required.',
+  }),
+})
+
+export function validateForgotPassword(input: any) {
+  return forgotPasswordSchema.safeParse(input)
+}
+
+const forgotConfirmSchema = z.object({
+  username: z.string({
+    required_error: 'Username is required.',
+  }),
+  newPassword: z.string({
+    required_error: 'New password is required.',
+  }),
+  confirmPassword: z.string({
+    required_error: 'Confirm password is required.',
+  }),
+  code: z.string({
+    required_error: 'Code is required.',
+  }),
+})
+
+export function validateForgotConfirm(input: any) {
+  return forgotConfirmSchema.safeParse(input)
+}

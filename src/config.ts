@@ -17,6 +17,7 @@ export const env = {
     process.env.APP_EMAIL_ACCOUNT ?? 'pruebas.desarrollo.all@gmail.com',
   APP_EMAIL_PASSWORD: process.env.APP_EMAIL_PASSWORD ?? 'ymkc hbdb cnex hvvq',
   APP_API_URL: process.env.APP_API_URL ?? 'http://localhost:4000',
+  APP_FORGOT_PAGE: process.env.APP_FORGOT_PAGE ?? '/forgot.html',
   APP_CONFIRM_PAGE: process.env.APP_CONFIRM_PAGE ?? '/confirm.html',
   APP_ERROR_CODE_PAGE: process.env.APP_ERROR_CODE_PAGE ?? '/error.html',
   APP_RUN_SCHEDULE: process.env.APP_RUN_SCHEDULE ?? 'false',

@@ -134,6 +134,25 @@ const geContactTemplate = (
     `
 }
 
+const getForgotPasswordTemplate = (username: string, urlForgot: string) => {
+  return `
+      <head>
+          <link rel="stylesheet" href="./style.css">
+      </head>
+      
+      <div id="email___content">
+          <h2>Alguien ha solicitado un reinicio de contraseña para la siguiente cuenta:</h2>
+          <p>Nombre de usuario: ${username}</p>
+          <p>Si fue un error ignorá este correo que no va a pasar nada.</p>
+          <p>Para restaurar la contraseña, visita la siguiente dirección:</p>
+          <a
+              href="${urlForgot}"
+              target="_blank"
+          >Restaurar contraseña</a>
+      </div>
+    `
+}
+
 const mailService = {
   send,
   getConfirmTemplate,
@@ -141,6 +160,7 @@ const mailService = {
   getUpdateApplicationTemplate,
   getInactiveJobTemplate,
   geContactTemplate,
+  getForgotPasswordTemplate,
 }
 
 export default mailService

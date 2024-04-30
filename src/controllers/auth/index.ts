@@ -5,6 +5,8 @@ import { registerCompany } from './registerCompany'
 import { confirm } from './confirm'
 import { changePassword } from './changePassword'
 import { verifyToken } from './verifyToken'
+import { forgotPassword } from './forgotPassword'
+import { forgotConfirm } from './forgotConfirm'
 
 export const AuthController = {
   register,
@@ -14,4 +16,6 @@ export const AuthController = {
   confirm,
   changePassword,
   verifyToken,
+  forgotPassword,
+  forgotConfirm,
 }

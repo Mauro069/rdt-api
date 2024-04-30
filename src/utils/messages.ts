@@ -1,5 +1,6 @@
 export const messages = {
   mail: {
+    forgotSubject: 'Registro RDT - Reestablecer contraseña',
     registerSubject: 'Registro RDT - Confirmá tu correo',
     newApplicationSubjet: 'RDT - Nueva postulación',
     updateApplicationSubjet: 'RDT - Actualización postulación',
@@ -16,6 +17,8 @@ export const messages = {
     companyUpdated: 'Companía actualizada con éxito',
     uploadingFile: 'Imagenes subidas con éxito',
     passwordChange: 'Cambio de contraseña realizado con éxito',
+    passwordForgot:
+      'Envio de mail para reetablecer contraseña realizado con éxito',
     jobCreated: 'Aviso de trabajo creado con éxito',
     jobUpdated: 'Aviso de trabajo actualizado con éxito',
     provinceCreated: 'Provincia creada con éxito',
@@ -53,9 +56,11 @@ export const messages = {
     unverifiedUser: 'Usuario no verificado (falta confirmar el correo)',
     passwordCoincidence: 'Las contraseñas no coinciden',
     passwordNotValid: 'La constraseña nueva no puede ser igual a la anterior',
+    userOrMailNotExists: 'Usuario o mail no existen',
     invalidCredentials: 'Credenciales inválidas',
     invalidEmail: 'Email inválido',
     invalidDNI: 'DNI inválido',
+    usernameOrCodeInvalid: 'Usuario o codigo no válidos',
     existingUser: 'Ya hay un usuario registrado con esa información',
     userNotFound: 'Usuario no encontrado',
     usersNotFound: 'No se encontraron usuarios',

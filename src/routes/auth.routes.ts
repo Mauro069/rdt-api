@@ -268,6 +268,107 @@
  *         description: No autorizado debido a credenciales inválidas o error de autenticación.
  *       '500':
  *         description: Error interno del servidor.
+ * /auth/forgot-password:
+ *   post:
+ *     tags:
+ *       - Authentication
+ *     summary: Solicitar restablecimiento de contraseña
+ *     description: Permite a un usuario solicitar un restablecimiento de contraseña proporcionando su nombre de usuario o correo electrónico.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userOrMail:
+ *                 type: string
+ *                 description: Nombre de usuario o correo electrónico del usuario.
+ *     responses:
+ *       '201':
+ *         description: Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña.
+ *       '400':
+ *         description: Error de validación en la solicitud.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                  type: string
+ *       '401':
+ *         description: No se encontró ningún usuario con el nombre de usuario o correo electrónico proporcionado.
+ *       '500':
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ * /auth/forgot-confirm:
+ *   post:
+ *     tags:
+ *       - Authentication
+ *     summary: Confirmar restablecimiento de contraseña
+ *     description: Permite a un usuario confirmar el restablecimiento de su contraseña proporcionando su nombre de usuario, código de confirmación y nueva contraseña.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: Nombre de usuario del usuario.
+ *               newPassword:
+ *                 type: string
+ *                 description: Nueva contraseña.
+ *               confirmPassword:
+ *                 type: string
+ *                 description: Confirmación de la nueva contraseña.
+ *               code:
+ *                 type: string
+ *                 description: Código de confirmación recibido por el usuario.
+ *     responses:
+ *       '201':
+ *         description: Contraseña cambiada con éxito.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '400':
+ *         description: Error de validación en la solicitud.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '401':
+ *         description: Las contraseñas no coinciden.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       '500':
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 
 import { Router } from 'express'
@@ -298,5 +399,7 @@ router.post('/login', AuthController.login)
 router.get('/confirm/:token', AuthController.confirm)
 router.post('/change-password', [authMiddleware], AuthController.changePassword)
 router.get('/verify-token', AuthController.verifyToken)
+router.post('/forgot-password', AuthController.forgotPassword)
+router.post('/forgot-confirm', AuthController.forgotConfirm)
 
 export default router
