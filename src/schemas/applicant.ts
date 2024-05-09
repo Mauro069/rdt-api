@@ -28,7 +28,7 @@ const applicantSchema = z.object({
   province: z.string(),
   cityRegion: z.string(),
   gender: z.string(),
-  birthDate: z.coerce.date(),
+  birthDate: z.nullable(z.string().date()),
   birthPlace: z.string(),
   nationality: z.string(),
   maritalStatus: z.string(),
@@ -47,8 +47,8 @@ const applicantEducationSchema = z.object({
   degree: z.string({
     required_error: 'Degree is required.',
   }),
-  startDate: z.coerce.date().optional(),
-  endDate: z.coerce.date().optional(),
+  startDate: z.nullable(z.string().date()),
+  endDate: z.nullable(z.string().date()),
   description: z.string().max(2000).optional(),
 })
 
@@ -76,8 +76,8 @@ const applicantWorkExperienceSchema = z.object({
   }),
   industry: z.string().optional(),
   description: z.string().max(2000).optional(),
-  startDate: z.coerce.date().optional(),
-  endDate: z.coerce.date().optional(),
+  startDate: z.nullable(z.string().date()),
+  endDate: z.nullable(z.string().date()),
   skills: z.string().optional(),
 })
 
