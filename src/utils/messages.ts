@@ -8,6 +8,7 @@ export const messages = {
     newContactSubjet: 'RDT - Contacto de usuario',
   },
   success: {
+    userStatusUpdated: 'Estado de usuario actualizado',
     registration: 'Usuario registrado con éxito',
     login: 'Inicio de sesión exitoso',
     updateUser: 'Usuario actualizado correctamente',
