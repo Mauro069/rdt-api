@@ -81,6 +81,35 @@
  *     description: Recupera todas las aplicaciones asociadas al solicitante autenticado.
  *     security:
  *       - customToken: []
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 10
+ *         description: Number of items to return per page.
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number.
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: Field to sort by. Prefix with ':desc' or ':asc'.
+ *       - in: query
+ *         name: params
+ *         schema:
+ *           type: object
+ *         description: Por ejemplo {"title":"program"}
+ *         additionalProperties:
+ *           type: string
+ *         style: form
+ *         explode: true
  *     responses:
  *       '200':
  *         description: Una lista de aplicaciones.
@@ -339,6 +368,65 @@
  *                   type: string
  *                 error:
  *                   type: object
+ * /applications/applied/{applicationId}:
+ *   get:
+ *     summary: Verificar si un solicitante ha aplicado a una aplicación específica.
+ *     description: Este endpoint permite verificar si un solicitante ha aplicado a una aplicación específica.
+ *     tags:
+ *       - Applications
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: applicationId
+ *         required: true
+ *         description: ID de la aplicación a verificar.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       201:
+ *         description: Éxito en la verificación de la aplicación del solicitante.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 applied:
+ *                   type: boolean
+ *                   description: Indica si el solicitante ha aplicado a la aplicación especificada.
+ *       401:
+ *         description: Error de autenticación.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error de autenticación.
+ *       404:
+ *         description: El solicitante no ha sido encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error indicando que el solicitante no ha sido encontrado.
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error genérico.
+ *                 error:
+ *                   type: object
+ *                   description: Detalles del error.
  */
 
 import { Router } from 'express'
@@ -355,5 +443,9 @@ router.post(
   [authMiddleware],
   ApplicationController.update
 )
-
+router.get(
+  '/applied/:applicationId',
+  [authMiddleware],
+  ApplicationController.applied
+)
 export default router

@@ -19,7 +19,7 @@ export const messages = {
     uploadingFile: 'Imagenes subidas con éxito',
     passwordChange: 'Cambio de contraseña realizado con éxito',
     passwordForgot:
-      'Envio de mail para reetablecer contraseña realizado con éxito',
+      'Envio de mail para reestablecer contraseña realizado con éxito',
     jobCreated: 'Aviso de trabajo creado con éxito',
     jobUpdated: 'Aviso de trabajo actualizado con éxito',
     provinceCreated: 'Provincia creada con éxito',

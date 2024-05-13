@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
+import { v4 as uuidv4 } from 'uuid'
 
 import { UserModel } from '../../models/user.model'
 import { messages } from '../../utils/messages'
@@ -37,6 +38,8 @@ export async function forgotConfirm(
 
     const hashedPassword = await bcrypt.hash(newPassword, 10)
 
+    //actualizo el code
+    existingUser.code = uuidv4()
     existingUser.password = hashedPassword
 
     await existingUser.save()
