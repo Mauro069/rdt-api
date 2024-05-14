@@ -342,6 +342,34 @@
  *         description: ID del trabajo del cual obtener solicitantes
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 10
+ *         description: Number of items to return per page.
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number.
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: Field to sort by. Prefix with ':desc' or ':asc'.
+ *       - in: query
+ *         name: params
+ *         schema:
+ *           type: object
+ *         description: Por ejemplo {"title":"program"}
+ *         additionalProperties:
+ *           type: string
+ *         style: form
+ *         explode: true
  *     security:
  *       - customToken: []
  *     responses:

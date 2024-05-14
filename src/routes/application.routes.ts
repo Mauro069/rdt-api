@@ -119,35 +119,56 @@
  *               type: object
  *               properties:
  *                 applications:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       job:
+ *                   type: object
+ *                   properties:
+ *                     docs:
+ *                       type: array
+ *                       items:
  *                         type: object
  *                         properties:
- *                           company:
- *                             type: string
- *                           title:
- *                             type: string
- *                           description:
- *                             type: string
- *                           duration:
- *                             type: number
- *                           creationDate:
+ *                           job:
+ *                             type: object
+ *                             properties:
+ *                               company:
+ *                                 type: string
+ *                               title:
+ *                                 type: string
+ *                               description:
+ *                                 type: string
+ *                               duration:
+ *                                 type: number
+ *                               creationDate:
+ *                                 type: string
+ *                               status:
+ *                                 type: string
+ *                               id:
+ *                                 type: string
+ *                           applicant:
  *                             type: string
  *                           status:
  *                             type: string
+ *                           creationDate:
+ *                             type: string
  *                           id:
  *                             type: string
- *                       applicant:
- *                         type: string
- *                       status:
- *                         type: string
- *                       creationDate:
- *                         type: string
- *                       id:
- *                         type: string
+ *                     totalDocs:
+ *                       type: integer
+ *                     limit:
+ *                       type: integer
+ *                     totalPages:
+ *                       type: integer
+ *                     page:
+ *                       type: integer
+ *                     pagingCounter:
+ *                       type: integer
+ *                     hasPrevPage:
+ *                       type: boolean
+ *                     hasNextPage:
+ *                       type: boolean
+ *                     prevPage:
+ *                       type: null
+ *                     nextPage:
+ *                       type: null
  *       '401':
  *         description: No autorizado. El usuario no está autenticado.
  *         content:
