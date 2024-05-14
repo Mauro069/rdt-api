@@ -532,6 +532,65 @@
  *                 properties:
  *                   message:
  *                     type: string
+ * /jobs/applied/{jobId}:
+ *   get:
+ *     summary: Verificar si un solicitante ha aplicado a un aviso específico.
+ *     description: Este endpoint permite verificar si un solicitante ha aplicado a una aplicación específica.
+ *     tags:
+ *       - Jobs
+ *     security:
+ *       - customToken: []
+ *     parameters:
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         description: ID del aviso a verificar.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       201:
+ *         description: Éxito en la verificación de la aplicación del solicitante.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 applied:
+ *                   type: boolean
+ *                   description: Indica si el solicitante ha aplicado a la aplicación especificada.
+ *       401:
+ *         description: Error de autenticación.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error de autenticación.
+ *       404:
+ *         description: El solicitante no ha sido encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error indicando que el solicitante no ha sido encontrado.
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de error genérico.
+ *                 error:
+ *                   type: object
+ *                   description: Detalles del error.
  */
 
 import { Router } from 'express'
@@ -546,4 +605,5 @@ router.get('/all', JobController.getAll)
 router.post('/update/:jobId', [authMiddleware], JobController.update)
 router.get('/applicants/:jobId', [authMiddleware], JobController.getApplicants)
 router.get('/:jobId', JobController.getById)
+router.get('/applied/:jobId', [authMiddleware], JobController.applied)
 export default router
