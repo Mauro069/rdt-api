@@ -1,5 +1,7 @@
 import { Schema, model, Document } from 'mongoose'
 import { UserStatus, UserType } from '../interfaces'
+// @ts-ignore
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 export interface IUser extends Document {
   id: any
@@ -27,6 +29,8 @@ const userSchema = new Schema({
     default: 'APPLICANT',
   },
 })
+
+userSchema.plugin(mongoosePaginate)
 
 userSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
