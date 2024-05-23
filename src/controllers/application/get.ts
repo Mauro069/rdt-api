@@ -39,7 +39,13 @@ export async function get(req: Request, res: Response): Promise<void> {
 
     const sortedOptions = {
       ...options,
-      populate: 'job',
+      populate: {
+        path: 'job',
+        populate: {
+          path: 'company',
+          select: 'businessName description', // Selecciona los campos que deseas poblar
+        },
+      },
     }
 
     // @ts-ignore

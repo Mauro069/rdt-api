@@ -58,6 +58,7 @@ export const messages = {
     passwordCoincidence: 'Las contraseñas no coinciden',
     passwordNotValid: 'La constraseña nueva no puede ser igual a la anterior',
     userOrMailNotExists: 'Usuario o mail no existen',
+    userSuspended: 'Usuario suspendido',
     invalidCredentials: 'Credenciales inválidas',
     invalidEmail: 'Email inválido',
     invalidDNI: 'DNI inválido',

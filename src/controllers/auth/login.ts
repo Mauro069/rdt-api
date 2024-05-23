@@ -38,6 +38,10 @@ export async function login(req: Request, res: Response): Promise<void> {
       res.status(401).json({ message: messages.error.unverifiedUser })
       return
     }
+    if (user.status === userStatus.SUSPENDED) {
+      res.status(401).json({ message: messages.error.userSuspended })
+      return
+    }
 
     const token = getToken({ userId: user.id, userType: user.userType })
 

@@ -39,8 +39,17 @@ export async function getUsers(req: Request, res: Response): Promise<void> {
       return
     }
 
+    //@ts-ignore
+    const sanitizedDocs = users.docs.map((user) => {
+      const { _id, password, code, __v, ...rest } = user.toObject()
+      return { ...rest, id: _id }
+    })
+
     res.status(200).json({
-      users,
+      users: {
+        ...users,
+        docs: sanitizedDocs,
+      },
     })
   } catch (error) {
     res.status(500).json({ message: messages.error.generic, error })
