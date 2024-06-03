@@ -86,7 +86,7 @@ const getUpdateApplicationTemplate = (businessName: string, title: string) => {
       <div id="email___content">
           <img src="cid:logo" alt="logo">
           <h2>Actualización</h2>
-          <p>La empresa ${businessName} actualizó el stado de tu postulación al aviso ${title}</p>
+          <p>La empresa ${businessName} actualizó el estado de tu postulación al aviso ${title}</p>
       </div>
     `
 }

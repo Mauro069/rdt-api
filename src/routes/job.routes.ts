@@ -415,12 +415,12 @@
  *                           lastName:
  *                             type: string
  *                             description: Apellido del solicitante
- *                       rejectionReason:
+ *                       reason:
  *                         type: string
  *                         description: Razón de rechazo (si aplicable)
  *                       status:
  *                         type: string
- *                         enum: [PENDING, SEEN, REJECTED]
+ *                         enum: [PENDING, SEEN, REJECTED, CHOSEN]
  *                         description: Estado de la aplicación
  *                       creationDate:
  *                         type: string

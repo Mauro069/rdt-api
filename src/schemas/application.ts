@@ -19,10 +19,10 @@ const applicationSchema = z.object({
   applicant: z.string({
     required_error: 'Applicant ID is required.',
   }),
-  rejectionReason: z.string({
-    required_error: 'Rejection reason is required.',
+  reason: z.string({
+    required_error: 'Reason is required.',
   }),
-  status: z.enum(['PENDING', 'SEEN', 'REJECTED']).default('PENDING'),
+  status: z.enum(['PENDING', 'SEEN', 'REJECTED', 'CHOSEN']).default('PENDING'),
 })
 
 export function validateApplication(input: any) {
@@ -30,10 +30,10 @@ export function validateApplication(input: any) {
 }
 
 const applicationUodateSchema = z.object({
-  rejectionReason: z.string({
-    required_error: 'Rejection reason is required.',
+  reason: z.string({
+    required_error: 'Reason is required.',
   }),
-  status: z.enum(['PENDING', 'SEEN', 'REJECTED']).default('PENDING'),
+  status: z.enum(['PENDING', 'SEEN', 'REJECTED', 'CHOSEN']).default('PENDING'),
 })
 
 export function validateUpdateApplication(input: any) {

@@ -329,12 +329,12 @@
  *           schema:
  *             type: object
  *             properties:
- *               rejectionReason:
+ *               reason:
  *                 type: string
  *                 description: Razón de rechazo de la solicitud (opcional)
  *               status:
  *                 type: string
- *                 enum: [PENDING, SEEN, REJECTED]
+ *                 enum: [PENDING, SEEN, REJECTED, CHOSEN]
  *                 description: Estado de la solicitud (opcional)
  *     security:
  *       - customToken: []
@@ -358,7 +358,7 @@
  *                 error:
  *                   type: object
  *                   properties:
- *                     rejectionReason:
+ *                     reason:
  *                       type: string
  *       401:
  *         description: No autorizado

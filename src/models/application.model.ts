@@ -6,7 +6,7 @@ import { ApplicationStatus } from '../interfaces'
 export interface IApplication extends Document {
   job: Schema.Types.ObjectId
   applicant: Schema.Types.ObjectId
-  rejectionReason: string
+  reason: string
   status: ApplicationStatus
   creationDate: Date
 }
@@ -20,10 +20,10 @@ const applicationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Applicant',
   },
-  rejectionReason: String,
+  reason: String,
   status: {
     type: String,
-    enum: ['PENDING', 'SEEN', 'REJECTED'],
+    enum: ['PENDING', 'SEEN', 'REJECTED', 'CHOSEN'],
     default: 'PENDING',
   },
   creationDate: { type: Date, required: true },

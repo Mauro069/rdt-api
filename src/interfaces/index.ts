@@ -11,7 +11,7 @@ export type UserStatus = 'UNVERIFIED' | 'VERIFIED' | 'SUSPENDED'
 
 export type JobStatus = 'ACTIVE' | 'INACTIVE' | 'PAUSED' | 'DELETED'
 
-export type ApplicationStatus = 'PENDING' | 'SEEN' | 'REJECTED'
+export type ApplicationStatus = 'PENDING' | 'SEEN' | 'REJECTED' | 'CHOSEN'
 
 export interface IFilter extends Document {
   description: string
