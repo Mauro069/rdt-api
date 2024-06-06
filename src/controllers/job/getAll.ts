@@ -20,7 +20,7 @@ export async function getAll(req: Request, res: Response): Promise<void> {
 
     const sortedOptions = {
       ...options,
-      populate: 'company',
+      populate: ['company', 'workModality', 'province'],
     }
 
     if (typeof req.query.status === 'string') {

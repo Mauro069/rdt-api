@@ -38,6 +38,7 @@ export async function get(req: Request, res: Response): Promise<void> {
 
     const sortedOptions = {
       ...options,
+      populate: ['company', 'workModality', 'province'],
     }
 
     if (typeof req.query.status === 'string') {
@@ -63,7 +64,7 @@ export async function get(req: Request, res: Response): Promise<void> {
           (j: any) => j._id.toString() === job._id.toString()
         )
         jobs.docs[jobIndex] = {
-          ...jobs.docs[jobIndex].toObject(),
+          ...jobs.docs[jobIndex].toJSON(),
           applications,
         }
       })

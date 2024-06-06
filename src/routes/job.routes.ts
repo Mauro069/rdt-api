@@ -29,6 +29,15 @@
  *               duration:
  *                 type: number
  *                 description: Duración del trabajo en días.
+ *               province:
+ *                 type: string
+ *                 description: The province of the job.
+ *               cityRegion:
+ *                 type: string
+ *                 description: The city or region of the job.
+ *               workModality:
+ *                 type: string
+ *                 description: The work modality (e.g., full-time, part-time).
  *             required:
  *               - company
  *               - title

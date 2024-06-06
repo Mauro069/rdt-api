@@ -11,6 +11,9 @@ export interface IJob extends Document {
   creationDate: Date
   updateDate: Date
   status: JobStatus
+  province: Schema.Types.ObjectId
+  cityRegion: string
+  workModality: Schema.Types.ObjectId
 }
 
 const jobSchema = new Schema({
@@ -27,6 +30,15 @@ const jobSchema = new Schema({
     type: String,
     enum: ['ACTIVE', 'INACTIVE', 'PAUSED', 'DELETED'],
     default: 'ACTIVE',
+  },
+  province: {
+    type: Schema.Types.ObjectId,
+    ref: 'Province',
+  },
+  cityRegion: String,
+  workModality: {
+    type: Schema.Types.ObjectId,
+    ref: 'WorkModality',
   },
 })
 

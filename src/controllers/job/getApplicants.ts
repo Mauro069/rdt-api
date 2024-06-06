@@ -24,20 +24,6 @@ export async function getApplicants(
       return
     }
 
-    const { id, error, message } = getUserId(req)
-
-    if (error) {
-      res.status(401).json({ message: message })
-      return
-    }
-
-    const existingCompany = await CompanyModel.findOne({ user: id })
-
-    if (!existingCompany) {
-      res.status(404).json({ message: messages.error.companyNotFound })
-      return
-    }
-
     const params = req.params
 
     const { jobId } = params

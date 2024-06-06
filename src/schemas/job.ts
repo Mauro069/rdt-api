@@ -17,6 +17,11 @@ const jobSchema = z.object({
     .gt(1)
     .lt(31),
   status: z.enum(['ACTIVE', 'INACTIVE', 'PAUSED', 'DELETED']).default('ACTIVE'),
+  province: z.string(),
+  cityRegion: z.string(),
+  workModality: z.string({
+    required_error: 'Work modality is required.',
+  }),
 })
 
 export function validateJob(input: any) {

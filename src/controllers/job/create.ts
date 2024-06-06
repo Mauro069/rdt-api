@@ -5,6 +5,8 @@ import { getUserId } from '../../utils/getUserId'
 import { validateJob } from '../../schemas/job'
 import { IJob, JobModel } from '../../models/job.model'
 import { CompanyModel } from '../../models/company.model'
+import { WorkModalityModel } from '../../models/workModality.model'
+import { ProvinceModel } from '../../models/province.model'
 
 export async function create(req: Request, res: Response): Promise<void> {
   try {
@@ -28,6 +30,24 @@ export async function create(req: Request, res: Response): Promise<void> {
     if (!existingCompany) {
       res.status(404).json({ message: messages.error.companyNotFound })
       return
+    }
+
+    if (result.data.workModality) {
+      const workModality = WorkModalityModel.findOne({
+        _id: result.data.workModality,
+      })
+      if (!workModality) {
+        res.status(404).json({ message: messages.error.workModalityNotFound })
+        return
+      }
+    }
+
+    if (result.data.province) {
+      const province = ProvinceModel.findOne({ _id: result.data.province })
+      if (!province) {
+        res.status(404).json({ message: messages.error.provinceNotFound })
+        return
+      }
     }
 
     const newJob: IJob = new JobModel({
