@@ -64,7 +64,7 @@ export async function get(req: Request, res: Response): Promise<void> {
           (j: any) => j._id.toString() === job._id.toString()
         )
         jobs.docs[jobIndex] = {
-          ...jobs.docs[jobIndex].toJSON(),
+          ...jobs.docs[jobIndex].toObject(),
           applications,
         }
       })
