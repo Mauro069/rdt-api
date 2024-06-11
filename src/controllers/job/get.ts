@@ -55,20 +55,18 @@ export async function get(req: Request, res: Response): Promise<void> {
       sortedOptions
     )
 
+    const docs: any = []
+
     await Promise.all(
       jobs.docs.map(async (job: any) => {
         const applications = await ApplicationModel.find({ job: job._id })
           .populate('applicant')
           .exec()
-        const jobIndex = jobs.docs.findIndex(
-          (j: any) => j._id.toString() === job._id.toString()
-        )
-        jobs.docs[jobIndex] = {
-          ...jobs.docs[jobIndex].toObject(),
-          applications,
-        }
+        docs.push({ ...job.toJSON(), applications })
       })
     )
+
+    jobs.docs = docs
 
     res.status(200).json({ jobs: jobs })
   } catch (error) {

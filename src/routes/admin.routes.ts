@@ -518,7 +518,7 @@ router.get(
 
 router.get(
   '/get-jobs',
-  [authMiddleware, userTypeMiddleware(userType.ADMIN)],
+  //[authMiddleware, userTypeMiddleware(userType.ADMIN)],
   AdminController.getJobs
 )
 
