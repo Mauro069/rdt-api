@@ -6,18 +6,10 @@ import { messages } from '../utils/messages'
 
 export default async () => {
   console.log('---------------------')
-  console.log(
-    'Borrando avisos con vigencia > a dias = ',
-    env.SCHEDULE_INACTIVE_DURATION
-  )
-
-  const inactiveDate = new Date()
-  inactiveDate.setDate(inactiveDate.getDate() - env.SCHEDULE_INACTIVE_DURATION)
-
+  
   const jobsByCompany = await JobModel.aggregate([
     {
       $match: {
-        updateDate: { $lt: inactiveDate },
         status: jobStatus.ACTIVE,
       },
     },
@@ -58,25 +50,40 @@ export default async () => {
             id: '$_id',
             title: '$title',
             description: '$description',
+            duration: '$duration',
+            updateDate: '$updateDate'
           },
         },
       },
     },
   ])
 
+  console.log('Desactivando avisos con vigencia vencida')
+
   jobsByCompany.forEach((companyData) => {
-    const template = mailService.getInactiveJobTemplate(
-      companyData.company,
-      companyData.jobs
-    )
-    mailService.send(
-      messages.mail.inactiveJobSubjet,
-      template,
-      //@ts-ignore
-      companyData.userEmail
-    )
-    companyData.jobs.forEach(async (job: any) => {
-      await JobModel.updateOne({ _id: job.id }, { status: jobStatus.INACTIVE })
-    })
+
+    const filteredJobs = companyData.jobs.filter((job:any)  => {
+      const updateDate = new Date(job.updateDate);
+      const durationDate = new Date();
+      durationDate.setDate(durationDate.getDate() - job.duration);
+      return updateDate < durationDate;
+    });
+
+    if(filteredJobs.length > 0){
+      const template = mailService.getInactiveJobTemplate(
+        companyData.company,
+        filteredJobs
+      )
+      mailService.send(
+        messages.mail.inactiveJobSubjet,
+        template,
+        //@ts-ignore
+        companyData.userEmail
+      )
+      filteredJobs.forEach(async (job: any) => {
+        await JobModel.updateOne({ _id: job.id }, { status: jobStatus.INACTIVE })
+      })
+    }
+
   })
 }
