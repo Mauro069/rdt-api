@@ -6,7 +6,7 @@ import { messages } from '../utils/messages'
 
 export default async () => {
   console.log('---------------------')
-  
+
   const jobsByCompany = await JobModel.aggregate([
     {
       $match: {
@@ -51,7 +51,7 @@ export default async () => {
             title: '$title',
             description: '$description',
             duration: '$duration',
-            updateDate: '$updateDate'
+            updateDate: '$updateDate',
           },
         },
       },
@@ -61,15 +61,14 @@ export default async () => {
   console.log('Desactivando avisos con vigencia vencida')
 
   jobsByCompany.forEach((companyData) => {
+    const filteredJobs = companyData.jobs.filter((job: any) => {
+      const updateDate = new Date(job.updateDate)
+      const durationDate = new Date()
+      durationDate.setDate(durationDate.getDate() - job.duration)
+      return updateDate < durationDate
+    })
 
-    const filteredJobs = companyData.jobs.filter((job:any)  => {
-      const updateDate = new Date(job.updateDate);
-      const durationDate = new Date();
-      durationDate.setDate(durationDate.getDate() - job.duration);
-      return updateDate < durationDate;
-    });
-
-    if(filteredJobs.length > 0){
+    if (filteredJobs.length > 0) {
       const template = mailService.getInactiveJobTemplate(
         companyData.company,
         filteredJobs
@@ -81,9 +80,11 @@ export default async () => {
         companyData.userEmail
       )
       filteredJobs.forEach(async (job: any) => {
-        await JobModel.updateOne({ _id: job.id }, { status: jobStatus.INACTIVE })
+        await JobModel.updateOne(
+          { _id: job.id },
+          { status: jobStatus.INACTIVE }
+        )
       })
     }
-
   })
 }
