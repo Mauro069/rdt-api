@@ -29,13 +29,15 @@ export async function getJobs(req: Request, res: Response): Promise<void> {
 
     const docs = await Promise.all(
       jobs.docs.map(async (job: any) => {
-        const applications = await ApplicationModel.find({ job: job._id }).exec();
+        const applications = await ApplicationModel.find({
+          job: job._id,
+        }).exec()
         return {
           ...job.toJSON(),
           hasApplications: applications.length > 0,
-        };
+        }
       })
-    );
+    )
 
     jobs.docs = docs
 

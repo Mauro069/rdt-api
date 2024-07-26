@@ -59,10 +59,10 @@ export async function get(req: Request, res: Response): Promise<void> {
       jobs.docs.map(async (job: any) => {
         const applications = await ApplicationModel.find({ job: job._id })
           .populate('applicant')
-          .exec();
-        return { ...job.toJSON(), applications };
+          .exec()
+        return { ...job.toJSON(), applications }
       })
-    );
+    )
 
     jobs.docs = docs
 
