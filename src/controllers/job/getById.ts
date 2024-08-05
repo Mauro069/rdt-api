@@ -23,7 +23,7 @@ export async function getById(req: Request, res: Response): Promise<void> {
 
     const job = await JobModel.findOne({
       _id: jobId,
-      status: { $in: [jobStatus.ACTIVE, jobStatus.PAUSED] },
+      //status: { $in: [jobStatus.ACTIVE, jobStatus.PAUSED] },
     }).populate(['company', 'workModality', 'province'])
 
     if (job === null) {
