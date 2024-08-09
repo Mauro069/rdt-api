@@ -7,6 +7,8 @@ import { JobModel } from '../../models/job.model'
 import { CompanyModel } from '../../models/company.model'
 import { WorkModalityModel } from '../../models/workModality.model'
 import { ProvinceModel } from '../../models/province.model'
+import { UserModel } from '../../models/user.model'
+import { userType } from '../../utils/constants'
 
 export async function update(req: Request, res: Response): Promise<void> {
   try {
@@ -25,13 +27,21 @@ export async function update(req: Request, res: Response): Promise<void> {
       return
     }
 
-    const existingCompany = await CompanyModel.findOne({ user: id })
+    const existingUser = await UserModel.findById(id)
 
-    if (!existingCompany) {
-      res.status(404).json({ message: messages.error.companyNotFound })
+    if (!existingUser) {
+      res.status(400).json({ message: messages.error.notFound })
       return
     }
 
+    if (existingUser.userType !== userType.ADMIN) {
+      const existingCompany = await CompanyModel.findOne({ user: id })
+
+      if (!existingCompany) {
+        res.status(404).json({ message: messages.error.companyNotFound })
+        return
+      }
+    }
     const params = req.params
 
     const { jobId } = params
